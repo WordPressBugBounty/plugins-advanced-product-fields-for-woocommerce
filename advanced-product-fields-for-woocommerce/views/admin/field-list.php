@@ -24,7 +24,9 @@ use SW_WAPF\Includes\Classes\Helper;
 
         <div rv-cloak>
             <div rv-show="fields | isNotEmpty" class="wapf-field-list__footer">
-                <a href="#" class="button button-primary button-large" rv-on-click="addField">Add a Field</a>
+                <a href="#" class="button button-primary button-large" rv-on-click="addField">
+                    <?php _e("Add a Field", 'advanced-product-fields-for-woocommerce') ?>
+                </a>
             </div>
         </div>
 

@@ -86,11 +86,21 @@ namespace SW_WAPF\Includes\Classes {
 					'title' => __('Text swatches','advanced-product-fields-for-woocommerce'),
 					'pro'   => true,
 				],
+                [
+                    'id'    => 'img',
+                    'title' => __('Calculation','advanced-product-fields-for-woocommerce'),
+                    'pro'   => true,
+                ],
 				[
 					'id'    => 'img',
-					'title' => __('Content: image','advanced-product-fields-for-woocommerce'),
+					'title' => __('Content: shortcodes & HTML','advanced-product-fields-for-woocommerce'),
 					'pro'   => true,
 				],
+                [
+                    'id'    => 'img',
+                    'title' => __('Content: image','advanced-product-fields-for-woocommerce'),
+                    'pro'   => true,
+                ],
 				[
 					'id'    => 'section',
 					'title' => __('Layout: section','advanced-product-fields-for-woocommerce'),

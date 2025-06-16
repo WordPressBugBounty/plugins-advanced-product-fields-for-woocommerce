@@ -8,6 +8,7 @@ namespace SW_WAPF\Includes\Models {
 
     class Conditional
     {
+        /** @var ConditionalRule[] */
         public $rules;
 
         public function __construct()

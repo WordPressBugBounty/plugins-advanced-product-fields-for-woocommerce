@@ -12,7 +12,7 @@ if(!empty($model['field']->options['choices'])) {
 
     foreach ($model['field']->options['choices'] as $option) {
 
-        $unique = mt_rand(10000,99999); //'wapf_field_' . $model['field']->id .'_' . $option['slug'];
+        $unique = wp_rand(10000,99999); //'wapf_field_' . $model['field']->id .'_' . $option['slug'];
 
         $attributes = [
             'id'            => $unique,

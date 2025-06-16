@@ -2,10 +2,10 @@
 
 <div class="wapf-field__setting" data-setting="<?php echo $model['id']; ?>">
     <div class="wapf-setting__label">
-        <label><?php _e($model['label'],'advanced-product-fields-for-woocommerce');?></label>
+        <label><?php echo esc_html( $model['label'] );?></label>
         <?php if(isset($model['description'])) { ?>
             <p class="wapf-description">
-                <?php _e($model['description'],'advanced-product-fields-for-woocommerce');?>
+                <?php echo esc_html( $model['description'] );?>
             </p>
         <?php } ?>
     </div>
@@ -17,7 +17,7 @@
                     if(isset($model['default']) && $model['default'] === $value)
                         $selected = true;
 */
-                    echo '<option value="'.$value.'">'.$label.'</option>';
+                    echo '<option value="'. esc_attr( $value ).'">'.esc_html( $label ).'</option>';
                 }
             ?>
         </select>

@@ -8,10 +8,13 @@ namespace SW_WAPF\Includes\Models {
 
     class FieldPricing
     {
+        /** @var bool */
         public $enabled;
 
+        /** @var float */
         public $amount;
 
+        /** @var string */
         public $type;
 
         public function __construct()

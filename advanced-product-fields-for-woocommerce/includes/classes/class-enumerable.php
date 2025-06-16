@@ -12,11 +12,17 @@ namespace SW_WAPF\Includes\Classes {
         private function __construct (ArrayIterator $iterator)
         {
             $this->iterator = $iterator;
+            // Set iterator back to the 1st element.
             $this->iterator->rewind();
         }
 
+        /**
+         * @param $source
+         * @return Enumerable|null
+         */
         public static function from ($source)
         {
+            // Only ArrayIterator possible atm.
             $iterator = null;
 
             if ($source instanceof Enumerable)
@@ -29,13 +35,20 @@ namespace SW_WAPF\Includes\Classes {
                 return new Enumerable($iterator);
             }
 
+            // No array, return empty array.
             return new Enumerable(new ArrayIterator([]));
         }
 
         #region Query functions
 
+        /**
+         * @param $predicate
+         *
+         * @return Enumerable
+         */
         public function select($predicate)
         {
+            // Back to 1st.
             $this->iterator->rewind();
 
             $objects = [];
@@ -48,13 +61,20 @@ namespace SW_WAPF\Includes\Classes {
             return self::from($objects);
         }
 
+        /**
+         * @param $predicate string | \Closure
+         * @return Enumerable
+         */
         public function where ($predicate)
         {
+            // Back to 1st.
             $this->iterator->rewind();
 
+            // while items
             $keys = [];
             while ($this->iterator->valid())
             {
+                // Remove from iterator when predicate not true.
                 if(!$predicate($this->iterator->current(), $this->iterator->key()))
                     array_push($keys, $this->iterator->key());
                 $this->iterator->next();
@@ -67,14 +87,21 @@ namespace SW_WAPF\Includes\Classes {
             return $this;
         }
 
+        /**
+         * @param $predicate string|\Closure
+         *
+         * @return object|array|null
+         */
         public function firstOrDefault($predicate)
         {
 
             $this->iterator->rewind();
             if(!$this->iterator->valid()) return null;
 
+            // while items
             while ($this->iterator->valid())
             {
+                // Push onto result if predicate returns true.
                 if($predicate($this->iterator->current(), $this->iterator->key()))
                     return $this->iterator->current();
                 $this->iterator->next();
@@ -131,6 +158,10 @@ namespace SW_WAPF\Includes\Classes {
 
         #region String Functions
 
+        /**
+         * Joins an array of objects by generating a string of values with separators.
+         * @return string
+         */
         public function join($value_predicate, $separator)
         {
             $this->iterator->rewind();
@@ -138,6 +169,7 @@ namespace SW_WAPF\Includes\Classes {
             $result = [];
             while ($this->iterator->valid())
             {
+                // Push onto result if predicate returns true.
                 array_push($result, $value_predicate($this->iterator->current(),$this->iterator->key()));
                 $this->iterator->next();
             }
@@ -148,6 +180,9 @@ namespace SW_WAPF\Includes\Classes {
         #endregion
 
         #region Operations
+        /**
+         * Turn a list of lists into a list. Only goes 2 levels deep at this point.
+         */
         public function flatten()
         {
             $flat = [];
@@ -186,6 +221,9 @@ namespace SW_WAPF\Includes\Classes {
         #endregion
 
         #region Conversion Functions
+        /**
+         * @return array
+         */
         public function toArray()
         {
             $this->iterator->rewind();

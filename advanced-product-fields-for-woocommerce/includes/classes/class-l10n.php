@@ -15,6 +15,7 @@ namespace SW_WAPF\Includes\Classes {
         {
             add_action('plugins_loaded', [$this, 'load_text_domain']);
 
+            // Polylang support
 	        add_filter( 'pll_get_post_types', [$this, 'add_cpt_to_polylang'], 10, 2);
         }
 
@@ -30,8 +31,10 @@ namespace SW_WAPF\Includes\Classes {
 	    public function add_cpt_to_polylang($post_types, $is_settings) {
 
 		    if ( $is_settings ) {
+			    // hides 'my_cpt' from the list of custom post types in Polylang settings
 			    unset( $post_types['wapf_product'] );
 		    } else {
+			    // enables language and translation management for 'my_cpt'
 			    $post_types['wapf_product'] = 'wapf_product';
 		    }
 

@@ -2,6 +2,11 @@
 
 namespace SW_WAPF\Includes\Classes {
 
+    /**
+     * Class Cache
+     * @package SW_WAPF\Includes\Classes
+     * Simple cache to hold objects during page request. Especially used for Field groups.
+     */
     class Cache
     {
         protected static $cache = [];

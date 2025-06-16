@@ -5,10 +5,10 @@
 <div class="wapf-field__setting" data-setting="<?php echo $model['id']; ?>">
 
     <div class="wapf-setting__label">
-        <label><?php _e($model['label'],'advanced-product-fields-for-woocommerce');?></label>
+        <label><?php echo esc_html($model['label'] );?></label>
         <?php if(isset($model['description'])) { ?>
             <p class="wapf-description">
-                <?php _e($model['description'],'advanced-product-fields-for-woocommerce');?>
+                <?php echo esc_html($model['description'] );?>
             </p>
         <?php } ?>
     </div>
@@ -18,7 +18,7 @@
         <div class="wapf-toggle" rv-unique-checkbox>
             <input rv-on-change="onChange" rv-checked="<?php echo $model['is_field_setting'] ? 'field' : 'settings'; ?>.pricing.enabled" type="checkbox" >
             <label class="wapf-toggle__label" for="wapf-toggle-">
-                <span class="wapf-toggle__inner" data-true="<?php _e('Yes','advanced-product-fields-for-woocommerce'); ?>" data-false="<?php _e('No','advanced-product-fields-for-woocommerce'); ?>"></span>
+                <span class="wapf-toggle__inner" data-true="<?php _e('Yes','advanced-product-fields-for-woocommerce'); ?>" data-false="<?php esc_attr_e('No','advanced-product-fields-for-woocommerce'); ?>"></span>
                 <span class="wapf-toggle__switch"></span>
             </label>
         </div>

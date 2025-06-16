@@ -361,10 +361,11 @@ namespace SW_WAPF\Includes\Classes {
 			    return true;
 
 		    foreach ($field->conditionals as $conditional) {
-			    if(self::validate_rules($group,$conditional->rules)) 
+			    if(self::validate_rules($group,$conditional->rules)) // conditional rules are valid, so the field should be shown and so it should be filled out if set to "required".
 				    return true;
 		    }
 
+		    // Shouldn't be filled out as it should be hidden due to the conditionals.
 		    return false;
 
 	    }
@@ -424,6 +425,7 @@ namespace SW_WAPF\Includes\Classes {
             return $options;
         }
 
+        // Same function as below but doesn't sanitize labels but the raw value coming from the frontend.
         public static function sanitize_raw_value(Field $field,$value) {
 	        switch($field->type) {
 		        case 'checkboxes'   :
@@ -475,14 +477,17 @@ namespace SW_WAPF\Includes\Classes {
 
         public static function pricing_value(Field $field, $raw_value) {
 
+            // Bail early
             if(empty($raw_value))
                 return [];
 
+            // True-false Checkbox wasn't checked, so pricing is 0 (the default).
             if($field->type === 'true-false' && $raw_value == '0')
                 return [];
 
             $pricing = [];
 
+            // It's a choice field, pricing is on the choices.
             if( $field->is_choice_field() ) {
 
                 foreach ((array) $raw_value as $rv) {
@@ -501,6 +506,8 @@ namespace SW_WAPF\Includes\Classes {
 
             }
 
+            // Field is "normal" pricing field/
+
             $pricing[] = ['value' => $field->pricing->amount, 'type' => $field->pricing->type];
 
             return $pricing;
@@ -510,7 +517,9 @@ namespace SW_WAPF\Includes\Classes {
 
             if($include_price_label) {
 
+                // Pricing field has options. We'll append the pricing indication to the labels.
                 if(!empty($field->options['choices'])) {
+                    // Raw value is an array with the option text
                     $labels = [];
 
                     foreach ((array) $raw_value as $rv) {
@@ -541,13 +550,18 @@ namespace SW_WAPF\Includes\Classes {
         }
 
         public static function do_pricing($amount, $qty) {
+            // Fixed fee
             return (float) $amount/$qty;
         }
 
+	    // Currently, we only validate "required" fields but we should extend this. For example "number" fields should
+	    //have a number between min/max attributes etc...
 	    public static function is_field_value_valid(Field $field, $value = null) {
 
 		    if($field->required) {
 
+			    // Value is null or not posted to the backend. That means this form field was hidden (due to dependency)
+			    // So it's valid.
 			    if($value === null)
 				    return true;
 

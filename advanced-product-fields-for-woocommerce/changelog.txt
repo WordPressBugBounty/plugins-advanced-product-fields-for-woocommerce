@@ -1,5 +1,8 @@
 *** Advanced Product Fields for WooCommerce Changelog ***
 
+2025-06-16 - version 1.6.14
+* Tweak - better integration with theme builders who don't adhere to Woo standards.
+
 2025-04-03 - version 1.6.13
 * Fix - fixed a few translation strings.
 * Other - added changelog.txt.

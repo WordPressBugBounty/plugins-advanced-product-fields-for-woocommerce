@@ -13,7 +13,7 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: dist/class-wapf.php:78, dist/includes/controllers/class-admin-controller.php:555
+#: dist/class-wapf.php:78, dist/includes/controllers/class-admin-controller.php:558
 msgid "Product Field Groups"
 msgstr ""
 
@@ -369,6 +369,10 @@ msgstr ""
 msgid "false"
 msgstr ""
 
+#: dist/includes/classes/class-html.php:195
+msgid "required"
+msgstr ""
+
 #: dist/includes/classes/class-wapf-list-table.php:15
 msgid "Title"
 msgstr ""
@@ -381,12 +385,102 @@ msgstr ""
 msgid "Fields"
 msgstr ""
 
-#: dist/includes/classes/class-wapf-list-table.php:108
+#: dist/includes/classes/class-wapf-list-table.php:42
+msgid "Y/m/d g:i:s a"
+msgstr ""
+
+#: dist/includes/classes/class-wapf-list-table.php:52
+msgid "Y/m/d"
+msgstr ""
+
+#: dist/includes/classes/class-wapf-list-table.php:50
+msgid "%s ago"
+msgstr ""
+
+#: dist/includes/classes/class-wapf-list-table.php:39
+msgid "Unpublished"
+msgstr ""
+
+#: dist/includes/classes/class-wapf-list-table.php:65
+msgid "Last Modified"
+msgstr ""
+
+#: dist/includes/classes/class-wapf-list-table.php:62
+msgid "Scheduled"
+msgstr ""
+
+#: dist/includes/classes/class-wapf-list-table.php:60
+msgid "Missed schedule"
+msgstr ""
+
+#: dist/includes/classes/class-wapf-list-table.php:57, dist/includes/classes/class-wapf-list-table.php:222
+msgid "Published"
+msgstr ""
+
+#. translators: post title
+#: dist/includes/classes/class-wapf-list-table.php:103
+msgid "Edit &#8220;%s&#8221;"
+msgstr ""
+
+#: dist/includes/classes/class-wapf-list-table.php:104
+msgid "Edit"
+msgstr ""
+
+#. translators: post title
+#: dist/includes/classes/class-wapf-list-table.php:111
 msgid "Duplicate &#8220;%s&#8221;"
 msgstr ""
 
-#: dist/includes/classes/class-wapf-list-table.php:175
+#: dist/includes/classes/class-wapf-list-table.php:112
+msgid "Duplicate"
+msgstr ""
+
+#. translators: post title
+#: dist/includes/classes/class-wapf-list-table.php:124
+msgid "Restore &#8220;%s&#8221; from the Trash"
+msgstr ""
+
+#: dist/includes/classes/class-wapf-list-table.php:125
+msgid "Restore"
+msgstr ""
+
+#. translators: post title
+#: dist/includes/classes/class-wapf-list-table.php:134
+msgid "Delete &#8220;%s&#8221; permanently"
+msgstr ""
+
+#: dist/includes/classes/class-wapf-list-table.php:135
+msgid "Delete Permanently"
+msgstr ""
+
+#. translators: post title
+#: dist/includes/classes/class-wapf-list-table.php:144
+msgid "Move &#8220;%s&#8221; to the Trash"
+msgstr ""
+
+#: dist/includes/classes/class-wapf-list-table.php:145
+msgctxt "verb"
+msgid "Trash"
+msgstr ""
+
+#: dist/includes/classes/class-wapf-list-table.php:155, dist/includes/classes/class-wapf-list-table.php:225
+msgid "Draft"
+msgstr ""
+
+#: dist/includes/classes/class-wapf-list-table.php:181
 msgid "No Product Field Groups found."
+msgstr ""
+
+#: dist/includes/classes/class-wapf-list-table.php:188
+msgid "Move to Trash"
+msgstr ""
+
+#: dist/includes/classes/class-wapf-list-table.php:219
+msgid "All"
+msgstr ""
+
+#: dist/includes/classes/class-wapf-list-table.php:228
+msgid "Trash"
 msgstr ""
 
 #: dist/includes/classes/class-woocommerce-service.php:112
@@ -493,7 +587,8 @@ msgstr ""
 msgid "Error adding product to cart."
 msgstr ""
 
-#: dist/includes/controllers/class-product-controller.php:169
+#. translators: %s points to the field's label as given in the admin settings
+#: dist/includes/controllers/class-product-controller.php:170
 msgid "The field \"%s\" is required."
 msgstr ""
 

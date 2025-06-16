@@ -81,6 +81,7 @@ namespace SW_WAPF\Includes\Classes {
             return $products;
         }
 
+        // TODO: when Woo finally launches the version with custom product table, this will no longer work.
         public static function find_variations_by_name($term) {
 
             if(empty($term))
@@ -122,6 +123,11 @@ namespace SW_WAPF\Includes\Classes {
 
         }
 
+        /**
+         * @param $id string
+         *
+         * @return \WC_Product
+         */
         public static function get_product($id)
         {
             $product = wc_get_product($id);

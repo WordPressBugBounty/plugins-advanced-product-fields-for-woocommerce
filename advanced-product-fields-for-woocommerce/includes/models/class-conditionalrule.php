@@ -9,10 +9,13 @@ namespace SW_WAPF\Includes\Models {
     class ConditionalRule
     {
 
+        /** @var string */
         public $field;
 
+        /** @var string */
         public $condition;
 
+        /** @var string */
         public $value;
 
     }

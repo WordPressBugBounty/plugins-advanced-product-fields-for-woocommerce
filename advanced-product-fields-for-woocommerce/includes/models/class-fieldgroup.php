@@ -8,22 +8,35 @@ namespace SW_WAPF\Includes\Models {
 
     class FieldGroup
     {
+        /**
+         * @var int the CPT id
+         */
         public $id;
 
+        /** @var string "wapf_product". */
         public $type;
 
+        /**
+         * @var ConditionRuleGroup[]
+         */
         public $rules_groups;
 
+        /**
+         * @var Field[]
+         */
         public $fields;
 
+        /** @var [] contains the layout settings */
         public $layout;
 
         public function __construct()
         {
+            // Defaults
             $this->type = 'wapf_product';
             $this->rules_groups = [];
             $this->fields = [];
 
+            // Layout defaults
             $this->layout = [
                 'labels_position'       => 'above',
                 'instructions_position' => 'field',

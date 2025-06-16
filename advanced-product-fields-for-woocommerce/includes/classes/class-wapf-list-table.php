@@ -11,7 +11,7 @@ namespace SW_WAPF\Includes\Classes {
         public function get_columns() {
 
             $table_columns = [
-                'cb'                => '<input type="checkbox" />', 
+                'cb'                => '<input type="checkbox" />', // to display the checkbox for bulk operations.
                 'post_title'        => __( 'Title', 'advanced-product-fields-for-woocommerce' ),
                 'type'              => __('Type', 'advanced-product-fields-for-woocommerce'),
                 'fields'            => __('Fields', 'advanced-product-fields-for-woocommerce'),
@@ -36,32 +36,33 @@ namespace SW_WAPF\Includes\Classes {
             global $mode;
 
             if ( '0000-00-00 00:00:00' === $post->post_date ) {
-                $t_time    = $h_time = __( 'Unpublished' );
+                $t_time    = $h_time = __( 'Unpublished', 'advanced-product-fields-for-woocommerce' );
                 $time_diff = 0;
             } else {
-                $t_time = get_the_time( __( 'Y/m/d g:i:s a' ) );
+                $t_time = get_the_time( __( 'Y/m/d g:i:s a', 'advanced-product-fields-for-woocommerce' ) );
                 $m_time = $post->post_date;
                 $time   = get_post_time( 'G', true, $post );
 
                 $time_diff = time() - $time;
 
                 if ( $time_diff > 0 && $time_diff < DAY_IN_SECONDS ) {
-                    $h_time = sprintf( __( '%s ago' ), human_time_diff( $time ) );
+                    /* translators: see https://developer.wordpress.org/reference/functions/human_time_diff/ */
+                    $h_time = sprintf( __( '%s ago', 'advanced-product-fields-for-woocommerce' ), human_time_diff( $time ) );
                 } else {
-                    $h_time = mysql2date( __( 'Y/m/d' ), $m_time );
+                    $h_time = mysql2date( __( 'Y/m/d', 'advanced-product-fields-for-woocommerce' ), $m_time );
                 }
             }
 
             if ( 'publish' === $post->post_status ) {
-                $status = __( 'Published' );
+                $status = __( 'Published', 'advanced-product-fields-for-woocommerce' );
             } elseif ( 'future' === $post->post_status ) {
                 if ( $time_diff > 0 ) {
-                    $status = '<strong class="error-message">' . __( 'Missed schedule' ) . '</strong>';
+                    $status = '<strong class="error-message">' . __( 'Missed schedule', 'advanced-product-fields-for-woocommerce' ) . '</strong>';
                 } else {
-                    $status = __( 'Scheduled' );
+                    $status = __( 'Scheduled', 'advanced-product-fields-for-woocommerce' );
                 }
             } else {
-                $status = __( 'Last Modified' );
+                $status = __( 'Last Modified', 'advanced-product-fields-for-woocommerce' );
             }
 
             $status = apply_filters( 'post_date_column_status', $status, $post, 'date', $mode );
@@ -98,15 +99,17 @@ namespace SW_WAPF\Includes\Classes {
                 $actions['edit'] = sprintf(
                     '<a href="%s" aria-label="%s">%s</a>',
                     get_edit_post_link( $post->ID ),
-                    esc_attr( sprintf( __( 'Edit &#8220;%s&#8221;' ), $title ) ),
-                    __( 'Edit' )
+                    /* translators: post title */
+                    esc_attr( sprintf( __( 'Edit &#8220;%s&#8221;', 'advanced-product-fields-for-woocommerce' ), $title ) ),
+                    __( 'Edit', 'advanced-product-fields-for-woocommerce' )
                 );
                 if($post->post_status === 'publish') {
                     $actions['duplicate'] = sprintf(
                         '<a href="%s" aria-label="%s">%s</a>',
                         admin_url('admin.php?page=wapf-field-groups&wapf_duplicate='.$post->ID),
+                        /* translators: post title */
                         esc_attr( sprintf( __( 'Duplicate &#8220;%s&#8221;','advanced-product-fields-for-woocommerce' ), $title ) ),
-                        __( 'Duplicate' )
+                        __( 'Duplicate', 'advanced-product-fields-for-woocommerce' )
                     );
                 }
             }
@@ -117,8 +120,9 @@ namespace SW_WAPF\Includes\Classes {
                     $actions['untrash'] = sprintf(
                         '<a href="%s" aria-label="%s">%s</a>',
                         wp_nonce_url( admin_url( sprintf( $post_type_object->_edit_link . '&amp;action=untrash', $post->ID ) ), 'untrash-post_' . $post->ID ),
-                        esc_attr( sprintf( __( 'Restore &#8220;%s&#8221; from the Trash' ), $title ) ),
-                        __( 'Restore' )
+                        /* translators: post title */
+                        esc_attr( sprintf( __( 'Restore &#8220;%s&#8221; from the Trash', 'advanced-product-fields-for-woocommerce' ), $title ) ),
+                        __( 'Restore', 'advanced-product-fields-for-woocommerce' )
                     );
                 }
 
@@ -126,8 +130,9 @@ namespace SW_WAPF\Includes\Classes {
                     $actions['delete'] = sprintf(
                         '<a href="%s" class="submitdelete" aria-label="%s">%s</a>',
                         get_delete_post_link( $post->ID, '', true ),
-                        esc_attr( sprintf( __( 'Delete &#8220;%s&#8221; permanently' ), $title ) ),
-                        __( 'Delete Permanently' )
+                        /* translators: post title */
+                        esc_attr( sprintf( __( 'Delete &#8220;%s&#8221; permanently', 'advanced-product-fields-for-woocommerce' ), $title ) ),
+                        __( 'Delete Permanently', 'advanced-product-fields-for-woocommerce' )
                     );
                 }
 
@@ -135,8 +140,9 @@ namespace SW_WAPF\Includes\Classes {
                     $actions['trash'] = sprintf(
                         '<a href="%s" class="submitdelete" aria-label="%s">%s</a>',
                         get_delete_post_link( $post->ID ),
-                        esc_attr( sprintf( __( 'Move &#8220;%s&#8221; to the Trash' ), $title ) ),
-                        _x( 'Trash', 'verb' )
+                        /* translators: post title */
+                        esc_attr( sprintf( __( 'Move &#8220;%s&#8221; to the Trash', 'advanced-product-fields-for-woocommerce' ), $title ) ),
+                        _x( 'Trash', 'verb', 'advanced-product-fields-for-woocommerce' )
                     );
                 }
 
@@ -146,7 +152,7 @@ namespace SW_WAPF\Includes\Classes {
                 '<strong><a class="row-title" href="%s">%s</a>%s</strong>%s',
                 get_edit_post_link($post->ID),
                 esc_html($title),
-                $post->post_status === 'draft' ? ' &mdash; <span class="post-state">'.__('Draft').'</span>' : '',
+                $post->post_status === 'draft' ? ' &mdash; <span class="post-state">'.__('Draft', 'advanced-product-fields-for-woocommerce').'</span>' : '',
                 $this->row_actions($actions)
             );
 
@@ -172,14 +178,14 @@ namespace SW_WAPF\Includes\Classes {
 
         public function no_items() {
 
-            _e( 'No Product Field Groups found.', 'advanced-product-fields-for-woocommerce');
+            esc_html_e( 'No Product Field Groups found.', 'advanced-product-fields-for-woocommerce');
 
         }
 
         public function get_bulk_actions() {
 
             $actions = [
-                'trash'    => __('Move to Trash')
+                'trash'    => __('Move to Trash', 'advanced-product-fields-for-woocommerce')
             ];
 
             return $actions;
@@ -209,31 +215,35 @@ namespace SW_WAPF\Includes\Classes {
             $status_links = [];
 
 
-            $status_links['all'] = sprintf('<a href="%s" class="%s">%s</a> (%d)', admin_url('admin.php?page=wapf-field-groups'), $status === 'all' ? 'current' : '',  __('All'), $counts['all']);
+            // Always show 'all'
+            $status_links['all'] = sprintf('<a href="%s" class="%s">%s</a> (%d)', admin_url('admin.php?page=wapf-field-groups'), $status === 'all' ? 'current' : '',  __('All', 'advanced-product-fields-for-woocommerce'), $counts['all']);
 
             if($counts['publish']>0)
-                $status_links['publish'] = sprintf('<a href="%s" class="%s">%s</a> (%d)',admin_url('admin.php?page=wapf-field-groups&post_status=publish'), $status === 'publish' ? 'current' : '', __('Published'), $counts['publish']);
+                $status_links['publish'] = sprintf('<a href="%s" class="%s">%s</a> (%d)',admin_url('admin.php?page=wapf-field-groups&post_status=publish'), $status === 'publish' ? 'current' : '', __('Published', 'advanced-product-fields-for-woocommerce'), $counts['publish']);
 
             if($counts['draft']>0)
-                $status_links['draft'] = sprintf('<a href="%s" class="%s">%s</a> (%d)',admin_url('admin.php?page=wapf-field-groups&post_status=draft'), $status === 'draft' ? 'current' : '',__('Draft'), $counts['draft']);
+                $status_links['draft'] = sprintf('<a href="%s" class="%s">%s</a> (%d)',admin_url('admin.php?page=wapf-field-groups&post_status=draft'), $status === 'draft' ? 'current' : '',__('Draft', 'advanced-product-fields-for-woocommerce'), $counts['draft']);
 
             if($counts['trash']>0)
-                $status_links['trash'] = sprintf('<a href="%s" class="%s">%s</a> (%d)',admin_url('admin.php?page=wapf-field-groups&post_status=trash'), $status === 'trash' ? 'current' : '',__('Trash'), $counts['trash']);
+                $status_links['trash'] = sprintf('<a href="%s" class="%s">%s</a> (%d)',admin_url('admin.php?page=wapf-field-groups&post_status=trash'), $status === 'trash' ? 'current' : '',__('Trash', 'advanced-product-fields-for-woocommerce'), $counts['trash']);
 
             return $status_links;
         }
 
         public function prepare_items() {
 
+            // Columns
             $columns                = $this->get_columns();
             $hidden                 = [];
             $sortable               = $this->get_sortable_columns();
             $this->_column_headers  = [$columns, $hidden, $sortable];
 
-            $items_per_page         = 10; 
+            // Config
+            $items_per_page         = 10; // TODO: get from a screen option.
             $page                   = isset($_GET['paged']) ? $_GET['paged'] : 1;
             $status                 = $this->get_current_post_status();
 
+            // Options for get_posts()
             $query_options = [
                 'post_type'     => wapf_get_setting('cpts'),
                 'numberposts'   => $items_per_page,
@@ -241,20 +251,24 @@ namespace SW_WAPF\Includes\Classes {
                 'post_status'   => $status === 'all' ? ['publish','draft'] : $status
             ];
 
+            // Pagination
             $this->set_pagination_args([
                 'total_items' => $this->get_all_counts()[$status],
                 'per_page'    => $items_per_page
             ]);
 
+            // Handle sorting
             if(!empty($_GET['orderby']))
                 $query_options['orderby'] = $_GET['orderby'];
 
             if(!empty($_GET['order']))
                 $query_options['order'] = strtoupper($_GET['order']);
 
+            // Process bulk actions
             $this->process_bulk_actions();
 
 
+            // Finally, get the data
             $posts = get_posts($query_options);
             $this->items = $posts;
 

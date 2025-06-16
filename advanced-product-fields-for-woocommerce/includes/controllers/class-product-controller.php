@@ -18,24 +18,41 @@ namespace SW_WAPF\Includes\Controllers {
 
         public function __construct()
         {
+            /*
+             * Order of execution:
+             * 'validate_cart_data'
+             * 'add_fields_to_cart_item'
+             * 'split_cart_items_by_quantity'
+             */
+
+            // Before the "add to cart" button, display the fields for product pages.
             add_action('woocommerce_before_add_to_cart_button',             [$this, 'display_field_groups']);
 
+            // Validate data in cart
             add_filter('woocommerce_add_to_cart_validation',                [$this, 'validate_cart_data'], 10, 6);
 
+            // Adjust cart item pricing for fields with pricing logic.
             add_action('woocommerce_before_calculate_totals',               [$this,'adjust_cart_item_pricing']);
 
+            // Add the meta data of the fields to the cart item. and set options pricing if need be
             add_filter( 'woocommerce_add_cart_item_data',                   [$this, 'add_fields_to_cart_item'], 10, 3 );
 
+            // Display custom cart item data in cart and checkout.
             add_filter('woocommerce_get_item_data',                         [$this,'display_fields_on_cart_and_checkout'],10, 2);
 
+            // Save / Display custom field value as custom order item meta data.
             add_action( 'woocommerce_checkout_create_order_line_item',      [$this,'create_order_line_item'], 20, 4);
 
+            // Change "add to cart" text when options need to be selected
             add_filter('woocommerce_product_add_to_cart_text',              [$this, 'change_add_to_cart_text'], 10, 2);
 
+            // User has to select options so adding to cart via ajax isn't possible.
             add_filter('woocommerce_product_supports',                      [$this, 'check_product_support'], 10, 3);
 
+            // Products with options shouldn't have an add to cart url (other than the product page URL)
             add_filter('woocommerce_product_add_to_cart_url',               [$this, 'set_add_to_cart_url'], 10, 2);
 
+            // Order again
 	        add_filter('woocommerce_order_again_cart_item_data',            [$this, 'order_again_cart_item_data'], 10, 3);
 
         }
@@ -51,6 +68,7 @@ namespace SW_WAPF\Includes\Controllers {
 		        $fields = Enumerable::from( $field_groups )->merge( function($x){return $x->fields; } )->toArray();
 
 		        foreach( $meta_data as $field_id => $field_meta ) {
+			        /** @var Field $field */
 			        $field = Enumerable::from($fields)->firstOrDefault(function($x) use($field_id){ return $x->id === $field_id;});
 					if( ! $field ) continue;
 
@@ -72,6 +90,7 @@ namespace SW_WAPF\Includes\Controllers {
 
         public function set_add_to_cart_url($url, $product) {
 
+            // Leave external/affiliate links alone.
             if($product->get_type() === 'external')
                 return $url;
 
@@ -91,6 +110,7 @@ namespace SW_WAPF\Includes\Controllers {
 
         public function change_add_to_cart_text($text, $product) {
 
+            // Bail early if not in stock.
             if(!$product->is_in_stock())
                 return $text;
 
@@ -106,9 +126,11 @@ namespace SW_WAPF\Includes\Controllers {
 
 	    public function validate_cart_data($passed, $product_id, $qty, $variation_id = null, $variations = null, $cart_item_data = null) {
 
+        	// No hidden field given and we're not adding to cart via a URL
 		    if( ! isset( $_REQUEST['wapf_field_groups'] ) && ! isset( $_GET['add-to-cart'] ) )
 			    return $passed;
 
+		    // No field groups, so our plugin isn't active on this product.
 		    $field_groups = Field_Groups::get_field_groups_of_product( $product_id );
 		    if( empty( $field_groups ) )
 			    return $passed;
@@ -136,6 +158,7 @@ namespace SW_WAPF\Includes\Controllers {
 			    foreach ( $field_groups as $group ) {
 				    foreach ( $group->fields as $field ) {
 
+					    // Our validation. For now, only checks "required"
 					    if ( ! Fields::should_field_be_filled_out( $group, $field ) ) {
 						    continue;
 					    }
@@ -143,6 +166,7 @@ namespace SW_WAPF\Includes\Controllers {
 					    $value = Fields::get_raw_field_value_from_request( $field, 0, true );
 
 					    if ( empty( $value ) ) {
+                            /* translators: %s points to the field's label as given in the admin settings */
 						    wc_add_notice( sprintf( __( 'The field "%s" is required.', 'advanced-product-fields-for-woocommerce' ), esc_html( $field->label ) ), 'error' );
 
 						    return false;
@@ -164,6 +188,7 @@ namespace SW_WAPF\Includes\Controllers {
 
             foreach ($values['wapf'] as $field) {
 
+                // Hack so that empty order lines would also be shown in backend.
                 if( ! empty( $field['value'] ) ) {
 	                $item->add_meta_data( $field['label'], $field['value'] );
 	                $fields_meta[$field['id']] = [
@@ -190,11 +215,14 @@ namespace SW_WAPF\Includes\Controllers {
 	            if(!$product)
 	                return;
 
+            // No external fields for grouped/external products
             if(in_array($product->get_type(),['grouped','external']))
                 return;
 
+            // Global field groups
             $field_groups = Field_Groups::get_valid_field_groups('product');
 
+            // "local" field group as set on the product itself.
             $product_field_group = get_post_meta($product->get_id(),'_wapf_fieldgroup', true);
 
             if($product_field_group)
@@ -211,11 +239,18 @@ namespace SW_WAPF\Includes\Controllers {
 
                 $variation_rules = [];
 
+                // If it's a variable product
                 if($product->is_type('variable')) {
+                    // Variable products don't have their own product URL, rather - they are children of a parent product and selecting them happens on the frontend.
+                    // So we may have to show/hide fields on the frontend for variable products - so we need the rules that have subject "product_variation".
+
+                    // Get all valid rule groups for this field group.
                     $valids = Field_Groups::get_valid_rule_groups($field_group);
 
                     $variation_rules = [];
 
+                    // Format the rules about variations for output in HTML attribute so we can take care of it on the frontend.
+                    // Result is like this: [ [rule1,rul2,...] [rule1,...] ] Rules within an array should be checked with AND. Arrays should be checked in OR fashion.
                     foreach ($valids as $rule_group) {
                         $filtered_rules = Enumerable::from($rule_group->rules)->where(function($rule) {
                             return $rule->subject === 'product_variation';
@@ -241,12 +276,14 @@ namespace SW_WAPF\Includes\Controllers {
                     'variation_rules'       => $variation_rules
                 ];
 
+                // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                 echo Html::field_group($product, $field_group, $data);
 
             }
 
-            echo '<input type="hidden" value="'.implode(',',$group_ids).'" name="wapf_field_groups"/>';
+            echo '<input type="hidden" value="'. esc_attr( implode(',', $group_ids ) ) .'" name="wapf_field_groups"/>';
             echo '</div>';
+            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             Html::product_totals($product);
 			echo '</div>';
         }
@@ -259,13 +296,10 @@ namespace SW_WAPF\Includes\Controllers {
             if(!is_array($_REQUEST['wapf']))
                 return $cart_item_data;
 
-            $field_groups = Field_Groups::get_by_ids(explode(',', sanitize_text_field($_REQUEST['wapf_field_groups'])));
-
-            $fields = Enumerable::from($field_groups)->merge(function($x){return $x->fields; })->toArray();
-
-            $wapf_data = [];
-
-	        $product = wc_get_product(empty($variation_id) ? $product_id : $variation_id);
+            $field_groups   = Field_Groups::get_by_ids(explode(',', sanitize_text_field($_REQUEST['wapf_field_groups'])));
+            $fields         = Enumerable::from($field_groups)->merge(function($x){return $x->fields; })->toArray();
+            $wapf_data      = [];
+	        $product        = wc_get_product(empty($variation_id) ? $product_id : $variation_id);
 
             foreach($_REQUEST['wapf'] as $raw_field_id => $field_value) {
 				if($field_value === '')
@@ -273,6 +307,7 @@ namespace SW_WAPF\Includes\Controllers {
 
                 $field_id = str_replace('field_','',$raw_field_id);
 
+                /** @var Field $field */
                 $field = Enumerable::from($fields)->firstOrDefault(function ($x) use ($field_id) {
                     return $x->id === $field_id;
                 });
@@ -298,6 +333,7 @@ namespace SW_WAPF\Includes\Controllers {
 
             foreach( $cart_obj->get_cart() as $item ) {
 
+                // Not for us, bail early.
                 if( empty( $item['wapf'] ) )
                     continue;
 
@@ -329,6 +365,7 @@ namespace SW_WAPF\Includes\Controllers {
 
         public function display_fields_on_cart_and_checkout($item_data, $cart_item) {
 
+            // Bail early
             if(empty($cart_item['wapf']) || !is_array($cart_item['wapf']) )
                 return $item_data;
 
@@ -338,11 +375,13 @@ namespace SW_WAPF\Includes\Controllers {
             if((is_cart() && get_option('wapf_settings_show_in_cart','yes') === 'yes') || (is_checkout() && get_option('wapf_settings_show_in_checkout','yes') === 'yes') ) {
 
                 foreach($cart_item['wapf'] as $field) {
+                    // Skip empty items.
+
                     if(empty($field['value_cart']))
                         continue;
 
                     $item_data[] = [
-                        'key'   => $field['label'], 
+                        'key'   => $field['label'], // Append "wapf_" so we know it's from our plugin later on.
                         'value' => $field['value_cart']
                     ];
 
@@ -359,9 +398,13 @@ namespace SW_WAPF\Includes\Controllers {
         	if($raw_value === null)
                 $raw_value = Fields::get_raw_field_value_from_request( $field );
 
-            $price_addition = []; 
+            // Pricing
+            $price_addition = []; // An array because we can have multiple pricing additions for a field (when it's a multiple choice field)
+
+            // Calculate the price if needed.
 
             if( $field->pricing_enabled() ) {
+                // $price_addition = Fields::pricing_value($field, $base,$quantity, $raw_value, $clone_idx > 0);
                 $price_addition = Fields::pricing_value($field, $raw_value);
             }
 
@@ -370,6 +413,7 @@ namespace SW_WAPF\Includes\Controllers {
                 'type'              => $field->type,
 	            'raw'               => is_string( $raw_value ) ? sanitize_textarea_field( $raw_value ) : array_map('sanitize_textarea_field', $raw_value),
                 'value'             => Fields::value_to_string($field, $raw_value, $price_addition > 0, $product),
+                // Cart may have different tax settings, so we should also have a value_cart to use in cart/checkout.
                 'value_cart'        => Fields::value_to_string($field, $raw_value, $price_addition > 0, $product,'cart'),
                 'price'             => $price_addition,
                 'label'             => esc_html($field->label),

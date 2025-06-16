@@ -11,7 +11,7 @@ if(!empty($model['field']->options['choices'])) {
     echo '<div class="wapf-radios">';
 
     foreach ($model['field']->options['choices'] as $option) {
-        $unique = mt_rand(10000,99999);
+        $unique = wp_rand(10000,99999);
         $attributes = [
             'id'            => $unique, //'wapf_field_' . $model['field']->id .'_' . $option['slug'],
             'name'          => sprintf('wapf[field_%s]', $model['field']->id),

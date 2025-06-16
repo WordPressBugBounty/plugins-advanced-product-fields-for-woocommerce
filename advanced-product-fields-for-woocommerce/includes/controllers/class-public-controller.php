@@ -13,13 +13,18 @@ namespace SW_WAPF\Includes\Controllers {
         public function __construct()
         {
 
+            // Bail early if Woo isn't activated.
             if(!$this->is_woocommerce_active())
                 return;
 
+            // Cover the basics
             add_action( 'wp_enqueue_scripts', [$this, 'register_assets'] );
 
+	        //Other
+	        // WooCommerce Stripe Payment Gateway disable apple pay/chrome pay buttons on product page as we can't integrate (we tried).
 	        add_filter('wc_stripe_hide_payment_request_on_product_page','__return_true',10,2);
 
+            // Single product page logic
             new Product_Controller();
 
         }

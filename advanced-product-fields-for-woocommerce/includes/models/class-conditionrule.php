@@ -9,10 +9,19 @@ namespace SW_WAPF\Includes\Models {
     class ConditionRule
     {
 
+        /**
+         * @var string
+         */
         public $subject;
 
+        /**
+         * @var string
+         */
         public $condition;
 
+        /**
+         * @var string|string[]|int[]
+         */
         public $value;
     }
 

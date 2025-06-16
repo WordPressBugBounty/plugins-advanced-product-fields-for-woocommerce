@@ -215,9 +215,11 @@ namespace SW_WAPF\Includes\Classes {
         public static function is_field_group_valid(FieldGroup $field_group)
         {
 
+            // No rules are set, so it's valid.
             if(empty($field_group->rules_groups))
                 return true;
 
+            // Check rule group validity (in "or" fashion)
             foreach ($field_group->rules_groups as $rule_group) {
                 if(self::is_rule_group_valid($rule_group))
                     return true;
@@ -244,10 +246,12 @@ namespace SW_WAPF\Includes\Classes {
             if(empty($group->rules))
                 return true;
 
+            // Allow to pass in a product to check for that, instead of the current viewing product.
             foreach ($group->rules as $rule) {
 
                 $value = $rule->value;
 
+                // Prepare 'value' to a proper array if needed.
                 if(is_array($value) && count($value) > 0 && isset($value[0]['text']))
                     $value = Enumerable::from($value)->select(function($x) {
                         return $x['id'];
@@ -266,6 +270,7 @@ namespace SW_WAPF\Includes\Classes {
         {
 
             switch ($condition) {
+                // User-related
                 case 'auth':
                     return is_user_logged_in() === true;
                 case '!auth':
@@ -276,6 +281,7 @@ namespace SW_WAPF\Includes\Classes {
             $product = empty($product) ? $GLOBALS['product'] : $product;
 
             switch ($condition) {
+                // Product tests
                 case 'product':
                 case 'products':
                     return self::is_current_product($product, (array)$value) === true;

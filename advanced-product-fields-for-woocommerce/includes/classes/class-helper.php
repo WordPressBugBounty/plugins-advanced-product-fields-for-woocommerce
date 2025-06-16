@@ -5,6 +5,7 @@ namespace SW_WAPF\Includes\Classes {
     class Helper
     {
 
+	    // WP has a bug in their "wp_slash" function that is only fixed in wp 5.5 so we define our own here.
 	    public static function wp_slash($value) {
 		    if ( is_array( $value ) ) {
 			    $value = array_map( 'self::wp_slash', $value );
@@ -46,9 +47,15 @@ namespace SW_WAPF\Includes\Classes {
 	        return $count_cache;
         }
 
+        /**
+         * Converts an object or array to a string suitable to print in a HTML attribute.
+         * @param $thing Object or array
+         * @return string
+         */
         public static function thing_to_html_attribute_string($thing){
 
             $encoded = wp_json_encode($thing);
+            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             return function_exists('wc_esc_json') ? wc_esc_json($encoded) : _wp_specialchars($encoded, ENT_QUOTES, 'UTF-8', true);
 
         }
@@ -57,6 +64,7 @@ namespace SW_WAPF\Includes\Classes {
 
             $display_settings = WooCommerce_Service::get_price_display_options();
 
+            // Convert our pricing display options to standard Woo, so they align for the "wc_price_args" filter.
             $args = apply_filters( 'wc_price_args', [
                 'ex_tax_label'       => false,
                 'currency'           => '',
@@ -80,6 +88,10 @@ namespace SW_WAPF\Includes\Classes {
             $formatted_price = ( $negative ? '-' : '' ) . sprintf( $args['price_format'], get_woocommerce_currency_symbol( $args['currency'] ), $price );
             $return = $formatted_price;
 
+            /*if ( $args['ex_tax_label'] && wc_tax_enabled() ) {
+                $return .= ' <small class="wqm-tax-label">' . WC()->countries->ex_tax_or_vat() . '</small>';
+            } */
+
             $return = apply_filters( 'wc_price', $return, $price, $args, $unformatted_price, $original_price );
 
             $sign = '+';
@@ -88,6 +100,12 @@ namespace SW_WAPF\Includes\Classes {
 
         }
 
+        /**
+         * Normalize string decimal
+         *
+         * Changes 'xx.xxx,xx' to 'xxxxx.xx'
+         *
+         */
         public static function normalize_string_decimal($number)
         {
             return preg_replace('/\.(?=.*\.)/', '', (str_replace(',', '.', $number)));
@@ -101,6 +119,7 @@ namespace SW_WAPF\Includes\Classes {
 		    if($type === 'percent' || $type === 'p')
 			    return $amount;
 
+		    // Maybe add tax to it.
 		    $amount = self::maybe_add_tax($product,$amount,$for);
 
 		    return $amount;
@@ -109,9 +128,11 @@ namespace SW_WAPF\Includes\Classes {
 
 	    public static function maybe_add_tax($product, $price, $for_page = 'shop') {
 
+		    // Empty or negative
 		    if(empty($price) || $price < 0 || !wc_tax_enabled())
 			    return $price;
 
+		    // Allow id's to be passed in.
 		    if(is_int($product))
 			    $product = wc_get_product($product);
 
@@ -132,6 +153,13 @@ namespace SW_WAPF\Includes\Classes {
 
 		    return floatval($product->get_price());
 
+		    /*
+		    if(wc_prices_include_tax())
+			    $price = wc_get_price_including_tax($product);
+		    else $price = wc_get_price_excluding_tax($product);
+
+		    return $price;
+		    */
 	    }
 
     }

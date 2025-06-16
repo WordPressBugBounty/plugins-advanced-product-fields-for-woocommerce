@@ -31,6 +31,7 @@ namespace SW_WAPF\Includes\Classes {
             $json_array = json_decode(json_encode($fg->fields),true);
 
             foreach($json_array as &$field) {
+                // Everything in "options" has to be a property:
                 if (!empty($field["options"])) {
                     foreach ($field["options"] as $k => $v) {
                         $field[$k] = $v;
@@ -38,6 +39,7 @@ namespace SW_WAPF\Includes\Classes {
                     unset($field['options']);
                 }
 
+                // We renamed "paragraph" to "content" in 1.5.8 to be in line with pro version.
                 if( $field['type'] === 'paragraph') $field['type'] = 'content';
             }
 
@@ -46,6 +48,11 @@ namespace SW_WAPF\Includes\Classes {
             return $json_array;
         }
 
+        /**
+         * Will convert the JSON coming from to admin backend into a FieldGroup object.
+         * @param $raw
+         * @return FieldGroup
+         */
         public static function raw_json_to_field_group($raw) {
 
             $fg = new FieldGroup();
@@ -110,6 +117,7 @@ namespace SW_WAPF\Includes\Classes {
                     $field->options['default'] = sanitize_text_field($raw_field['default']);
 	            if(isset($raw_field['p_content']))
 		            $field->options['p_content'] = sanitize_textarea_field($raw_field['p_content'] );
+                // Set other attributes as options.
                 foreach($raw_field as $k => $v) {
                     if( in_array($k, ['id','key','label','description','default','placeholder','p_content','choices','conditionals','type','required','options','class','width','pricing','qty_based']) )
                         continue;
@@ -130,7 +138,7 @@ namespace SW_WAPF\Includes\Classes {
                         $rule = new ConditionalRule();
                         $rule->field = sanitize_text_field($raw_rule['field']);
                         $rule->value = sanitize_text_field($raw_rule['value']);
-                        $rule->condition = sanitize_text_field($raw_rule['condition']); 
+                        $rule->condition = sanitize_text_field($raw_rule['condition']); // make sure condition doesn't contain "<" or ">" as that is part of html entities.
 
                         $conditional->rules[] = $rule;
                     }
@@ -172,6 +180,11 @@ namespace SW_WAPF\Includes\Classes {
 
         }
 
+        /**
+         * Get all field groups
+         * @param $of_type string
+         * @return FieldGroup[]
+         */
         public static function get_all($of_type = 'product') {
 
             $cache_key = self::$all_groups_cache_key . $of_type;
@@ -185,9 +198,10 @@ namespace SW_WAPF\Includes\Classes {
 					'post_type'                 => 'wapf_' . $of_type,
 					'posts_per_page'            => -1,
 					'post_status'               => 'publish',
-					'update_post_meta_cache'    => false    
+					'update_post_meta_cache'    => false    // We don't have meta keys so don't allow an extra DB query to cache them.
 				];
 
+	            // WPML support (this makes sure the CPT is filtered per language)
 	            if(function_exists('icl_get_languages')) {
 		            $args['suppress_filters'] = false;
 	            }
@@ -209,26 +223,36 @@ namespace SW_WAPF\Includes\Classes {
             return $cached;
         }
 
+        /**
+         * Get by the field group's ID.
+         * @param $id
+         * @throws
+         * @return FieldGroup | null
+         */
         public static function get_by_id($id) {
 
             global $post;
 
+            // Post ID is the current post we're viewing (handy for in backend)
             if($post && $post->ID == $id && in_array($post->post_type, wapf_get_setting('cpts')))
                 return self::process_data($post->post_content);
 
             $cache_key = self::$field_group_cache_key . $id;
 
+            // Is this single group already in cache?
             $cached = Cache::get($cache_key );
             if($cached !== false) {
                 return $cached;
             }
 
+            // The ID is not from the CPT but from the product meta directly.
             if(strpos($id, 'p_') !== false) {
                 $the_group = self::process_data(get_post_meta(intval(str_replace('p_','',$id)),'_wapf_fieldgroup', true));
                 Cache::set($cache_key,$the_group);
                 return $the_group;
             }
 
+            // If all groups are already in cache, loop them to get the correct group.
             $types = ['product'];
 
             foreach($types as $type) {
@@ -247,11 +271,13 @@ namespace SW_WAPF\Includes\Classes {
                 }
             }
 
+            // Not in cache, fetch from DB
             $post = get_post(intval($id));
 
             if(!$post || !in_array($post->post_type,wapf_get_setting('cpts')))
                 return null;
 
+            // Add to cache and return
             $cached = self::process_data($post->post_content);
             Cache::set($cache_key,$cached);
 
@@ -274,8 +300,13 @@ namespace SW_WAPF\Includes\Classes {
 
         }
 
+        /**
+         * Get all field groups that pass conditions (and thus should be displayed)
+         * @return FieldGroup[]
+         */
         public static function get_valid_field_groups($of_type) {
 
+            // Query for global field groups
             $field_groups = Field_Groups::get_all($of_type);
             $valid_field_groups = [];
 
@@ -303,6 +334,7 @@ namespace SW_WAPF\Includes\Classes {
 
 	    public static function get_field_groups_of_product( $product ) {
 
+		    // Allow an ID to be passed in
 		    if( ! is_object( $product ) )
 			    $product = wc_get_product( $product );
 
@@ -329,6 +361,7 @@ namespace SW_WAPF\Includes\Classes {
 
         public static function product_has_field_group($product) {
 
+            // Allow an ID to be passed in
             if(is_int($product))
                 $product = wc_get_product($product);
 
@@ -353,6 +386,15 @@ namespace SW_WAPF\Includes\Classes {
 
         }
 
+        /**
+         * save or update a post with a field group. If post_id is give, we update. Otherwise, insert.
+         * @param FieldGroup $fg
+         * @param $post_type
+         * @param null $post_id
+         * @param null $post_title
+         * @param null $status
+         * @return int
+         */
         public static function save(FieldGroup $fg, $post_type = 'wapf_product', $post_id = null, $post_title = null, $status = null) {
 
             $post_type = strtolower($post_type);
@@ -375,16 +417,20 @@ namespace SW_WAPF\Includes\Classes {
 
             $save['post_content'] = Helper::wp_slash(serialize($fg->to_array()));
 
+            // Update or insert the post.
             if($post_id)
                 $id = wp_update_post($save);
             else {
+                // First insert
                 $id = wp_insert_post($save);
 
+                // Then update the returned ID on the Field Group.
                 $fg->id = $id;
                 $update_data = [
                     'ID'            => $id,
                     'post_content'  => Helper::wp_slash(serialize($fg->to_array()))
                 ];
+                // And update DB
                 wp_update_post($update_data);
             }
 

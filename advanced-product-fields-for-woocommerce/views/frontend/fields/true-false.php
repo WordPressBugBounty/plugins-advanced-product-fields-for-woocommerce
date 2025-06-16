@@ -1,11 +1,11 @@
 <?php
 /** @var array $model */
-$unique = mt_rand(10000,99999);
+$unique = 'cb_' . wp_rand(10000,99999);
 ?>
 <div class="wapf-checkable">
-    <input type="hidden" value="0" name="wapf[field_<?php echo $model['field']->id;?>]" />
-    <label class="wapf-checkbox-label" for="<?php echo $unique;?>">
-        <input id="<?php echo $unique;?>" type="checkbox" value="1" <?php echo $model['field_attributes']; ?> />
+    <input type="hidden" value="0" name="wapf[field_<?php echo esc_attr( $model['field']->id ) ;?>]" />
+    <label class="wapf-checkbox-label" for="<?php echo esc_attr( $unique ); ?>">
+        <input id="<?php echo esc_attr( $unique );?>" type="checkbox" value="1" <?php echo $model['field_attributes']; ?> />
         <?php if(!empty($model['field']->options['message']) || $model['field']->pricing_enabled()){ ?>
             <span class="wapf-label-text">
                 <?php

@@ -27,20 +27,34 @@ namespace SW_WAPF\Includes\Classes
 	    ];
 
 	    #region General views
+        /**
+         * Echo a view
+         * @param $view
+         * @param $model
+         */
         public static function partial($view, $model = null)
         {
             ob_start();
             $dir = trailingslashit(wapf_get_setting('path')) . 'views/' . $view;
             include $dir . '.php';
+            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             echo ob_get_clean();
         }
 
+        /**
+         * return a view.
+         * @param $view
+         * @param $model
+         *
+         * @return string
+         */
         public static function view($view, $model = null)
         {
             ob_start();
             $dir = trailingslashit(wapf_get_setting('path')) . 'views/' . $view;
 
             include $dir . '.php';
+            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             return ob_get_clean();
         }
 
@@ -56,6 +70,7 @@ namespace SW_WAPF\Includes\Classes
 		    ob_start();
 		    $path = trailingslashit(wapf_get_setting('path')) . 'views/admin/help-modal.php';
 		    include $path;
+            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		    echo ob_get_clean();
 	    }
 
@@ -67,6 +82,7 @@ namespace SW_WAPF\Includes\Classes
             ob_start();
             $dir = trailingslashit(wapf_get_setting('path')) . 'views/admin/settings/' . $model['type'];
             include $dir . '.php';
+            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             echo ob_get_clean();
         }
 
@@ -74,6 +90,7 @@ namespace SW_WAPF\Includes\Classes
             ob_start();
             $path = trailingslashit(wapf_get_setting('path')) . 'views/admin/field.php';
             include $path;
+            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             echo ob_get_clean();
         }
 
@@ -81,6 +98,7 @@ namespace SW_WAPF\Includes\Classes
             ob_start();
             $path = trailingslashit(wapf_get_setting('path')) . 'views/admin/'.$view_name.'.php';
             include $path;
+            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             echo ob_get_clean();
         }
         #endregion
@@ -95,8 +113,10 @@ namespace SW_WAPF\Includes\Classes
             ob_start();
             $path = trailingslashit(wapf_get_setting('path')) . 'views/frontend/product-totals.php';
             include $path;
+            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             $totals_html = ob_get_clean();
 
+            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             echo apply_filters('wapf/html/product_totals',$totals_html, $product);
 
         }
@@ -112,6 +132,7 @@ namespace SW_WAPF\Includes\Classes
             ob_start();
             $dir = trailingslashit(wapf_get_setting('path')) . 'views/frontend/field-group.php';
             include $dir;
+            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             return ob_get_clean();
 
         }
@@ -125,6 +146,9 @@ namespace SW_WAPF\Includes\Classes
                 'field_attributes'  => self::field_attributes($product,$field,$fieldgroup_id)
             ];
 
+            // Prior to 1.5.7, the "paragraph" file name would be used but then if they upgrade
+            // to premium, it would throw error because there "content.php" is used.
+            // We can probably delete this a year after 1.5.7 is released.
             $file_name =  $field->type === 'paragraph' ? 'content' : $field->type;
 
             return self::view('frontend/fields/' . $file_name, $model);
@@ -168,7 +192,7 @@ namespace SW_WAPF\Includes\Classes
             $label = '<span>' . wp_kses($field->label, self::$minimal_allowed_html) .'</span>';
 
             if($show_required_symbol && $field->required)
-                $label .= ' <abbr class="required" title="' . esc_attr__( 'required', 'woocommerce' ) . '">*</abbr>';
+                $label .= ' <abbr class="required" title="' . esc_attr__( 'required', 'advanced-product-fields-for-woocommerce' ) . '">*</abbr>';
 
             if($field->pricing_enabled() && $field->type !== 'true-false' && !$field->is_choice_field())
                 $label .= ' <span class="wapf-pricing-hint">('. Helper::format_pricing_hint($field->pricing->type, $field->pricing->amount,$product,'shop') .')</span>';
@@ -191,7 +215,7 @@ namespace SW_WAPF\Includes\Classes
             if($field->required)
                 $field_attributes['required'] = '';
 
-            if($field->type !== 'select' && $field->pricing_enabled() ) { 
+            if($field->type !== 'select' && $field->pricing_enabled() ) { // Select lists will have to pricing attributes on their <option> elements.
                 $field_attributes['data-wapf-price'] = Helper::adjust_addon_price( $product,$field->pricing->amount, $field->pricing->type, 'shop' );
 
                 $field_attributes['data-wapf-pricetype'] = $field->pricing->type;

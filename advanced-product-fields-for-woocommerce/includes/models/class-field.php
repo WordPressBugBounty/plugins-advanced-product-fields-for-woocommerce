@@ -11,26 +11,37 @@ namespace SW_WAPF\Includes\Models {
     class Field
     {
 
+        /** @var string */
         public $id;
 
+        /** @var string */
         public $key;
 
+        /** @var string */
         public $label;
 
+        /** @var string */
         public $description;
 
+        /** @var string */
         public $type;
 
+        /** @var bool */
         public $required;
 
+        /** @var mixed[] */
         public $options;
 
+        /** @var Conditional[] */
         public $conditionals;
 
+        /** @var string */
         public $class;
 
+        /** @var int */
         public $width;
 
+        /** @var FieldPricing */
         public $pricing;
 
         public function __construct()
@@ -121,6 +132,7 @@ namespace SW_WAPF\Includes\Models {
 
         public function pricing_enabled() {
 
+             // For fields with "choices" like select list, radio buttons and checkboxes.
             if($this->is_choice_field() && !empty($this->options['choices']))
                 return Enumerable::from($this->options['choices'])->any(function($choice){
                     return isset($choice['pricing_type']) && $choice['pricing_type'] !== 'none';

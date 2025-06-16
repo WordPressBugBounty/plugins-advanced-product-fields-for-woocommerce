@@ -21,25 +21,30 @@ namespace SW_WAPF\Includes\Controllers {
 
         public function __construct()
         {
+            // Cover the basics
             add_action( 'admin_enqueue_scripts',                                [$this, 'register_assets']);
             add_action('admin_menu',                                            [$this, 'admin_menus']);
             add_filter('plugin_action_links_' . wapf_get_setting('basename'),   [$this, 'add_plugin_action_links']);
 
+            // Setup screen and post saving
             add_action('current_screen',                                        [$this, 'setup_screen']);
             add_action('admin_notices',                                         [$this, 'display_preloader']);
             foreach(wapf_get_setting('cpts') as $cpt) {
                 add_action('save_post_' . $cpt,                                 [$this, 'save_post'], 10, 3);
             }
 
+            // WooCommerce settings screen
             add_filter('woocommerce_settings_tabs_array',                       [$this,'woocommerce_settings_tab'], 100);
             add_action('woocommerce_settings_tabs_wapf_settings',               [$this,'woocommerce_settings_screen']);
             add_action( 'woocommerce_update_options_wapf_settings',             [$this, 'update_woo_settings']);
 
+            // WooCommerce "edit product" screen
             add_filter( 'woocommerce_product_data_tabs',                        [$this, 'add_product_tab']);
             add_action( 'woocommerce_product_data_panels',                      [$this, 'customfields_options_product_tab_content']);
             add_action( 'woocommerce_process_product_meta_simple',              [$this, 'save_fieldgroup_on_product']);
             add_action( 'woocommerce_process_product_meta_variable',            [$this, 'save_fieldgroup_on_product']);
 
+            // Ajax
             add_action('wp_ajax_wapf_search_products',                          [$this, 'search_woo_products']);
             add_action('wp_ajax_wapf_search_tags',                              [$this, 'search_woo_tags']);
             add_action('wp_ajax_wapf_search_cat',                               [$this, 'search_woo_categories']);
@@ -72,8 +77,10 @@ namespace SW_WAPF\Includes\Controllers {
                 $version = wapf_get_setting('version');
 
                 wp_enqueue_style('wapf-admin-css', $url . 'css/admin.min.css', [], $version);
-                wp_enqueue_script('wapf-admin-js', $url . 'js/admin.min.js', ['jquery','wp-color-picker'], $version, false); 
+                wp_enqueue_script('wapf-admin-js', $url . 'js/admin.min.js', ['jquery','wp-color-picker'], $version, false); // Make sure colorpicker is loaded as well.
+                // Styles & scripts for media selector
                 wp_enqueue_media();
+                // Add the color picker css file
                 wp_enqueue_style( 'wp-color-picker' );
 
                 wp_localize_script( 'wapf-admin-js', 'wapf_language', [
@@ -89,6 +96,7 @@ namespace SW_WAPF\Includes\Controllers {
 
                 wp_localize_script('wapf-admin-js', 'wapf_config', $localize_array);
 
+                // Don't do autosave
                 wp_dequeue_script('autosave');
             }
 
@@ -136,12 +144,14 @@ namespace SW_WAPF\Includes\Controllers {
 
             $this->make_unique($fg);
 
+            // Unhook to avoid infinite loop when calling wp_update_post (see note: https://codex.wordpress.org/Plugin_API/Action_Reference/save_post)
             foreach(wapf_get_setting('cpts') as $cpt) {
                 remove_action('save_post_' . $cpt, [$this, 'save_post'], 10);
             }
 
             Field_Groups::save($fg,$post->post_type,null,$post->post_title . ' - '. __('Copy','advanced-product-fields-for-woocommerce'), 'publish' );
 
+            // Re-hook
             foreach(wapf_get_setting('cpts') as $cpt) {
                 remove_action( 'save_post_' . $cpt, [$this, 'save_post'],10 );
             }
@@ -166,21 +176,23 @@ namespace SW_WAPF\Includes\Controllers {
 
             echo '<div id="customfields_options" class="panel woocommerce_options_panel">';
 
-            echo '<h4 class="wapf-product-admin-title">' .  __('Fields','advanced-product-fields-for-woocommerce') .' &mdash; <span style="opacity:.5;">'.__('Add some custom fields to this group.','advanced-product-fields-for-woocommerce').'</span>' . '</h4>';
+            echo '<h4 class="wapf-product-admin-title">' .  esc_html__('Fields','advanced-product-fields-for-woocommerce') .' &mdash; <span style="opacity:.5;">'. esc_html__('Add some custom fields to this group.','advanced-product-fields-for-woocommerce').'</span>' . '</h4>';
 
             $this->display_field_group_fields(true);
 
+            // Hide field group settings and make them default to only the product.
             echo '<div style="display:none;">';
             $this->display_field_group_conditions(true);
             echo '</div>';
 
-            echo '<h4 class="wapf-product-admin-title">' .  __('Layout','advanced-product-fields-for-woocommerce') .' &mdash; <span style="opacity:.5;">'.__('Field group layout settings','advanced-product-fields-for-woocommerce').'</span>' . '</h4>';
+            echo '<h4 class="wapf-product-admin-title">' .  esc_html__('Layout','advanced-product-fields-for-woocommerce') .' &mdash; <span style="opacity:.5;">'. esc_html__('Field group layout settings','advanced-product-fields-for-woocommerce').'</span>' . '</h4>';
             $this->display_field_group_layout(true);
 
             echo '</div>';
         }
 
         public function save_fieldgroup_on_product($post_id) {
+            // Nothing filled out - remove if it already existed
             if(empty($_POST['wapf-fields']) ||
                 empty($_POST['wapf-conditions']) ||
                 empty($_POST['wapf-layout'])) {
@@ -302,21 +314,26 @@ namespace SW_WAPF\Includes\Controllers {
 
         public function save_post($post_id, $post, $update) {
 
+            // Don't do anything when this is a revision or autosave.
             if (defined('DOING_AUTOSAVE') || is_int(wp_is_post_autosave($post)) || is_int(wp_is_post_revision($post))) {
                 return;
             }
 
+            // AJAX? Not used here
             if (defined('DOING_AJAX') && DOING_AJAX) {
                 return;
             }
 
+            // Don't save an auto-draft
             if (isset($post->post_status) && $post->post_status === 'auto-draft')
                 return;
 
+            // Bail early if request is unauthorized.
             if( !current_user_can(wapf_get_setting('capability')) ) {
                 return;
             }
 
+            // Verify nonce
             if(wp_verify_nonce($_POST['_wpnonce'],'update-post_' . $post_id) === false)
                 return;
 
@@ -325,6 +342,7 @@ namespace SW_WAPF\Includes\Controllers {
         }
 
         private function save($post_id, $saving_cpt = true) {
+            // Clear all cache as it will be stale.
             Cache::clear();
 
             $raw = [
@@ -345,18 +363,22 @@ namespace SW_WAPF\Includes\Controllers {
 
             $fg = Field_Groups::raw_json_to_field_group($raw);
 
+            // We're saving from the cpt (global field group)
             if($saving_cpt) {
+                // Unhook to avoid infinite loop when calling wp_update_post (see note: https://codex.wordpress.org/Plugin_API/Action_Reference/save_post)
                 foreach(wapf_get_setting('cpts') as $cpt) {
                     remove_action('save_post_' . $cpt, [$this, 'save_post'], 10);
                 }
 
                 Field_Groups::save($fg,$_REQUEST['wapf-fieldgroup-type'], $post_id);
 
+                // Re-hook
                 foreach(wapf_get_setting('cpts') as $cpt) {
                     remove_action( 'save_post_' . $cpt, [$this, 'save_post'],10 );
                 }
             } else {
-                $fg->id = 'p_' . $fg->id; 
+                $fg->id = 'p_' . $fg->id; // Prefix the ID so we know this is from a single product instead of the custom post type.
+                // We're saving on the product itself
                 update_post_meta( $post_id, '_wapf_fieldgroup', Helper::wp_slash($fg->to_array()));
             }
 
@@ -380,10 +402,12 @@ namespace SW_WAPF\Includes\Controllers {
 
         public function setup_screen() {
 
+            // If on main list screen
             if($this->is_screen('woocommerce_page_wapf-field-groups')) {
                $this->maybe_duplicate();
             }
 
+            // If on "add field group" screens, add metaboxes
             $cpts = wapf_get_setting('cpts');
             if($this->is_screen($cpts)) {
 
@@ -421,6 +445,7 @@ namespace SW_WAPF\Includes\Controllers {
         public function display_field_group_layout($for_product_admin = false) {
 
             $model = $this->create_layout_model($for_product_admin);
+            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             echo Html::view("admin/layout", $model);
 
         }
@@ -428,18 +453,21 @@ namespace SW_WAPF\Includes\Controllers {
         public function display_field_group_conditions($for_product_admin = false) {
 
             $model = $this->create_conditions_model($for_product_admin);
+            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             echo Html::view("admin/conditions", $model);
         }
 
         public function display_field_group_fields($for_product_admin = false) {
 
             $model = $this->create_field_group_model($for_product_admin);
+            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             echo Html::view("admin/field-list", $model);
 
         }
 
         private function create_layout_model($for_product_admin = false) {
 
+            // Defaults
            $fg = new FieldGroup();
            $model = [
                'layout' => $fg->layout,
@@ -461,6 +489,7 @@ namespace SW_WAPF\Includes\Controllers {
 
         private function create_conditions_model($for_product_admin = false) {
 
+            // Defaults.
             $model = [
                 'condition_options' => Conditions::get_fieldgroup_visibility_conditions(),
                 'conditions'        => [],
@@ -469,6 +498,8 @@ namespace SW_WAPF\Includes\Controllers {
 
             global $post;
 
+            // We're showing this on the WC product edit screen, so we set the conditions
+            // ourselves to match the product.
             if(is_bool($for_product_admin) && $for_product_admin) {
 
                 $field_group_raw = get_post_meta($post->ID, '_wapf_fieldgroup', true);
@@ -494,6 +525,7 @@ namespace SW_WAPF\Includes\Controllers {
 
         private function create_field_group_model($for_product_admin = false) {
 
+            // Defaults.
             $model = [
                 'fields'            => [],
                 'condition_options' => Conditions::get_field_visibility_conditions(),
@@ -528,6 +560,7 @@ namespace SW_WAPF\Includes\Controllers {
                 'count'         =>  Helper::get_fieldgroup_counts()['publish']
             ];
 
+            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             Html::wp_list_table('cpt-list-table',$model,$list);
 
         }
@@ -591,11 +624,13 @@ namespace SW_WAPF\Includes\Controllers {
             $fg->id = null;
 
 
+            // Give the fields a new ID.
             foreach($fg->fields as $f) {
 
                 $old_id = $f->id;
                 $f->id = uniqid();
 
+                // Replace old ID's in field conditionals with this new id.
                 foreach ($fg->fields as $f2){
                     if($f2->has_conditionals()){
                         foreach($f2->conditionals as $c) {

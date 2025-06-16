@@ -2,9 +2,9 @@
 
 <div class="wapf-field__setting" data-setting="<?php echo $model['id']; ?>">
     <div class="wapf-setting__label">
-        <label><?php _e($model['label'],'advanced-product-fields-for-woocommerce');?></label>
+        <label><?php echo esc_html( $model['label'] );?></label>
         <p class="wapf-description">
-            <?php _e($model['description'],'advanced-product-fields-for-woocommerce');?>
+            <?php esc_html( $model['description'] );?>
         </p>
     </div>
     <div class="wapf-setting__input">
@@ -13,7 +13,7 @@
 
             <div class="wapf-field__conditionals__container">
                 <div rv-if="fieldsForConditionals.fields | isEmpty" class="wapf-lighter">
-                    <?php _e('You need atleast 2 fields to create conditional rules. Add another field first.','advanced-product-fields-for-woocommerce');?>
+                    <?php esc_html_e('You need atleast 2 fields to create conditional rules. Add another field first.','advanced-product-fields-for-woocommerce');?>
                 </div>
                 <div rv-if="fieldsForConditionals.fields | isNotEmpty">
                     <div rv-each-conditional="field.conditionals">
@@ -42,10 +42,10 @@
                                 </td>
                             </tr>
                         </table>
-                        <div rv-if="$index | lt field.conditionals"><b><?php _e('Or','advanced-product-fields-for-woocommerce');?></b></div>
+                        <div rv-if="$index | lt field.conditionals"><b><?php esc_html_e('Or','advanced-product-fields-for-woocommerce');?></b></div>
                     </div>
                     <div style="padding-top: 5px;">
-                        <a href="#" rv-on-click="addConditional" class="button button-small"><?php _e('Add new rule group','advanced-product-fields-for-woocommerce'); ?></a>
+                        <a href="#" rv-on-click="addConditional" class="button button-small"><?php esc_html_e('Add new rule group','advanced-product-fields-for-woocommerce'); ?></a>
                     </div>
                 </div>
             </div>

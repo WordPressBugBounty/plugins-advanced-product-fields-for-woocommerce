@@ -2,10 +2,10 @@
 
 <div class="wapf-field__setting" data-setting="<?php echo $model['id']; ?>">
     <div class="wapf-setting__label">
-        <label><?php _e($model['label'],'advanced-product-fields-for-woocommerce');?></label>
+        <label><?php echo esc_html($model['label'] );?></label>
         <?php if(isset($model['description'])) { ?>
             <p class="wapf-description">
-                <?php _e($model['description'],'advanced-product-fields-for-woocommerce');?>
+                <?php echo esc_html($model['description'] );?>
             </p>
         <?php } ?>
     </div>
@@ -14,12 +14,12 @@
             <div class="wapf-options__header">
                 <div class="wapf-option__sort"></div>
                 <div class="wapf-option__flex"><?php _e('Option label','advanced-product-fields-for-woocommerce'); ?></div>
-                <!--<td style="font-weight:500;text-align: left;"><?php _e('Unique key','advanced-product-fields-for-woocommerce'); ?></td>-->
+                <!--<td style="font-weight:500;text-align: left;"><?php esc_html_e('Unique key','advanced-product-fields-for-woocommerce'); ?></td>-->
                 <?php if(isset($model['show_pricing_options']) && $model['show_pricing_options']) { ?>
-                    <div class="wapf-option__flex"><?php _e('Adjust pricing','advanced-product-fields-for-woocommerce'); ?></div>
-                    <div class="wapf-option__flex"><?php _e('Pricing amount','advanced-product-fields-for-woocommerce'); ?></div>
+                    <div class="wapf-option__flex"><?php esc_html_e('Adjust pricing','advanced-product-fields-for-woocommerce'); ?></div>
+                    <div class="wapf-option__flex"><?php esc_html_e('Pricing amount','advanced-product-fields-for-woocommerce'); ?></div>
                 <?php } ?>
-                <div class="wapf-option__selected"><?php _e('Selected', 'advanced-product-fields-for-woocommerce'); ?></div>
+                <div class="wapf-option__selected"><?php esc_html_e('Selected', 'advanced-product-fields-for-woocommerce'); ?></div>
                 <div  class="wapf-option__delete"></div>
             </div>
             <div rv-sortable-options="field.choices" class="wapf-options__body">
@@ -29,7 +29,7 @@
                     <?php if(isset($model['show_pricing_options']) && $model['show_pricing_options']) { ?>
                         <div class="wapf-option__flex">
                             <select rv-on-change="onChange" rv-value="choice.pricing_type">
-                                <option value="none"><?php _e('No price change','advanced-product-fields-for-woocommerce'); ?></option>
+                                <option value="none"><?php esc_html_e('No price change','advanced-product-fields-for-woocommerce'); ?></option>
                                 <?php
                                 foreach(\SW_WAPF\Includes\Classes\Fields::get_pricing_options() as $k => $v) {
                                     echo '<option ' . ($v['pro'] === true ? 'disabled' : '') . ' value="'.$k.'">'.$v['label'].'</option>';

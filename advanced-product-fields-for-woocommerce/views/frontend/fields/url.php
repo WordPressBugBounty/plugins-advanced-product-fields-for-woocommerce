@@ -3,4 +3,9 @@
 ?>
 
 
-<input type="url" value="<?php echo $model['field_value']; ?>" <?php echo $model['field_attributes']; ?> />
+<input type="url" value="<?php echo esc_attr( $model['field_value'] ); ?>" 
+    <?php
+    // phpcs:ignore WordPress.Security.EscapeOutput.UnsafePrintingFunction, WordPress.Security.EscapeOutput.OutputNotEscaped  
+    echo $model['field_attributes']; 
+    ?> 
+/>

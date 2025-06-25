@@ -79,6 +79,8 @@ namespace SW_WAPF\Includes\Classes {
             $unformatted_price = $price;
             $negative = $price < 0;
 
+            $price = self::maybe_add_tax( $product, $original_price, $for_page );
+
             $price = apply_filters( 'raw_woocommerce_price', $negative ? $price * -1 : $price, $original_price );
             $price = apply_filters( 'formatted_woocommerce_price', number_format( $price, $args['decimals'], $args['decimal_separator'], $args['thousand_separator'] ), $price, $args['decimals'], $args['decimal_separator'], $args['thousand_separator'], $original_price );
             if ( $display_settings['trimzero'] && $args['decimals'] > 0 ) {
@@ -126,26 +128,29 @@ namespace SW_WAPF\Includes\Classes {
 
 	    }
 
-	    public static function maybe_add_tax($product, $price, $for_page = 'shop') {
+	    public static function maybe_add_tax( $product, $price, $for_page = 'shop' ) {
 
 		    // Empty or negative
-		    if(empty($price) || $price < 0 || !wc_tax_enabled())
-			    return $price;
+		    if( empty( $price ) || $price < 0 || ! wc_tax_enabled() ) {
+                return $price;
+            }
 
 		    // Allow id's to be passed in.
-		    if(is_int($product))
-			    $product = wc_get_product($product);
+		    if( is_int( $product ) ) {
+                $product = wc_get_product( $product );
+            }
 
 		    $args = [ 'qty' => 1, 'price' => $price ];
-
-		    if($for_page === 'cart') {
-			    if(get_option('woocommerce_tax_display_cart') === 'incl')
-				    return wc_get_price_including_tax($product, $args);
+            
+		    if( $for_page === 'cart' ) {
+			    if( get_option( 'woocommerce_tax_display_cart' ) === 'incl' )
+				    return wc_get_price_including_tax( $product, $args );
 			    else
-				    return wc_get_price_excluding_tax($product, $args);
+				    return wc_get_price_excluding_tax( $product, $args );
 		    }
-		    else
-			    return wc_get_price_to_display($product, $args);
+		    else {
+                return wc_get_price_to_display( $product, $args );
+            }
 
 	    }
 

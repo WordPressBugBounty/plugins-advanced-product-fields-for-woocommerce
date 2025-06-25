@@ -1,5 +1,8 @@
 *** Advanced Product Fields for WooCommerce Changelog ***
 
+2025-06-25 - version 1.6.15
+* Tweak - better integration with WooCommerce tax settings.
+
 2025-06-16 - version 1.6.14
 * Tweak - better integration with theme builders who don't adhere to Woo standards.
 

@@ -189,13 +189,14 @@ namespace SW_WAPF\Includes\Classes
 
         public static function field_label(Field $field, $product, $show_required_symbol = true) {
 
-            $label = '<span>' . wp_kses($field->label, self::$minimal_allowed_html) .'</span>';
+            $label = '<span>' . wp_kses( $field->label, self::$minimal_allowed_html ) .'</span>';
 
-            if($show_required_symbol && $field->required)
+            if( $show_required_symbol && $field->required )
                 $label .= ' <abbr class="required" title="' . esc_attr__( 'required', 'advanced-product-fields-for-woocommerce' ) . '">*</abbr>';
 
-            if($field->pricing_enabled() && $field->type !== 'true-false' && !$field->is_choice_field())
-                $label .= ' <span class="wapf-pricing-hint">('. Helper::format_pricing_hint($field->pricing->type, $field->pricing->amount,$product,'shop') .')</span>';
+            if( $field->pricing_enabled() && $field->type !== 'true-false' && ! $field->is_choice_field() ) {
+                $label .= ' <span class="wapf-pricing-hint">(' . Helper::format_pricing_hint( $field->pricing->type, $field->pricing->amount, $product, 'shop' ) . ')</span>';
+            }
 
             return $label;
         }

@@ -117,9 +117,13 @@ namespace SW_WAPF\Includes\Classes {
                     $field->options['default'] = sanitize_text_field($raw_field['default']);
 	            if(isset($raw_field['p_content']))
 		            $field->options['p_content'] = sanitize_textarea_field($raw_field['p_content'] );
+                
+                if( isset( $raw_field['minimum'] ) &&  $raw_field['minimum'] !== '' ) $field->options['minimum'] = intval( $raw_field['minimum'] );
+                if( isset( $raw_field['maximum'] ) &&  $raw_field['maximum'] !== '' ) $field->options['maximum'] = intval( $raw_field['maximum'] );
+                
                 // Set other attributes as options.
                 foreach($raw_field as $k => $v) {
-                    if( in_array($k, ['id','key','label','description','default','placeholder','p_content','choices','conditionals','type','required','options','class','width','pricing','qty_based']) )
+                    if( in_array($k, [ 'maximum', 'minimum', 'id','key','label','description','default','placeholder','p_content','choices','conditionals','type','required','options','class','width','pricing','qty_based']) )
                         continue;
                     $field->options[sanitize_text_field($k)] = sanitize_textarea_field($v);
                 }

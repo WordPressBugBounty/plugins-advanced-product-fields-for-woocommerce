@@ -716,15 +716,15 @@ msgstr ""
 msgid "Should the product image change when options are selected?"
 msgstr ""
 
-#: dist/views/frontend/product-totals.php:9
+#: dist/views/frontend/product-totals.php:11
 msgid "Product total"
 msgstr ""
 
-#: dist/views/frontend/product-totals.php:13
+#: dist/views/frontend/product-totals.php:15
 msgid "Options total"
 msgstr ""
 
-#: dist/views/frontend/product-totals.php:17
+#: dist/views/frontend/product-totals.php:19
 msgid "Grand total"
 msgstr ""
 

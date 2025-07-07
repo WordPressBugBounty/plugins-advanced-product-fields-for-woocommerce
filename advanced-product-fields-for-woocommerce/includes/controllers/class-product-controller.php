@@ -366,27 +366,31 @@ namespace SW_WAPF\Includes\Controllers {
         public function display_fields_on_cart_and_checkout($item_data, $cart_item) {
 
             // Bail early
-            if(empty($cart_item['wapf']) || !is_array($cart_item['wapf']) )
+            if( empty( $cart_item['wapf'] ) || ! is_array( $cart_item['wapf'] ) ) {
                 return $item_data;
+            }
 
-            if (!is_array($item_data))
+            if ( ! is_array( $item_data ) ) {
                 $item_data = [];
+            }
 
-            if((is_cart() && get_option('wapf_settings_show_in_cart','yes') === 'yes') || (is_checkout() && get_option('wapf_settings_show_in_checkout','yes') === 'yes') ) {
+            if( ( is_cart() && get_option( 'wapf_settings_show_in_cart', 'yes' ) === 'yes' ) || ( is_checkout() && get_option( 'wapf_settings_show_in_checkout', 'yes' ) === 'yes' ) ) {
 
-                foreach($cart_item['wapf'] as $field) {
+                foreach( $cart_item['wapf'] as $field ) {
+                    
                     // Skip empty items.
-
-                    if(empty($field['value_cart']))
+                    if( $field['value_cart'] === '' ) {
                         continue;
+                    }
 
                     $item_data[] = [
-                        'key'   => $field['label'], // Append "wapf_" so we know it's from our plugin later on.
+                        'key'   => $field['label'],
                         'value' => $field['value_cart']
                     ];
 
                 }
             }
+            
             return $item_data;
 
         }

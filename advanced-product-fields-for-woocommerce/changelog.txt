@@ -1,5 +1,10 @@
 *** Advanced Product Fields for WooCommerce Changelog ***
 
+
+2025-07-07 - version 1.6.16
+ * Tweak -  * Improvement: improved compatibility with variable products and the pricing summary.
+ * Fix - fixed an issue where the default value "0" wouldn't be shown on number fields.
+ 
 2025-06-25 - version 1.6.15
 * Tweak - better integration with WooCommerce tax settings.
 

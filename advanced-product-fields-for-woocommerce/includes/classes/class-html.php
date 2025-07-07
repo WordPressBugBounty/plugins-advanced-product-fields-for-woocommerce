@@ -104,20 +104,20 @@ namespace SW_WAPF\Includes\Classes
         #endregion
 
         #region Product-related Functions
-        public static function product_totals($product) {
+        public static function product_totals( $product ) {
 
-            $product_id = $product->get_id();
-	        $product_type = $product->get_type() === 'variation' ? 'variable' : $product->get_type();
-            $product_price = wc_get_price_to_display($product);
+            $product_id     = $product->get_id();
+	        $product_type   = $product->get_type() === 'variation' ? 'variable' : $product->get_type();
+            $product_price  = wc_get_price_to_display( $product );
 
             ob_start();
-            $path = trailingslashit(wapf_get_setting('path')) . 'views/frontend/product-totals.php';
+            $path = trailingslashit( wapf_get_setting( 'path' ) ) . 'views/frontend/product-totals.php';
             include $path;
             // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             $totals_html = ob_get_clean();
 
             // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-            echo apply_filters('wapf/html/product_totals',$totals_html, $product);
+            echo apply_filters( 'wapf/html/product_totals', $totals_html, $product );
 
         }
         #endregion
@@ -228,10 +228,10 @@ namespace SW_WAPF\Includes\Classes
             if(isset($field->options['placeholder']))
                 $field_attributes['placeholder'] = $field->options['placeholder'];
 
-            if(isset($field->options['minimum']))
+            if( isset($field->options['minimum']) && $field->options['minimum'] !== '' )
                 $field_attributes['min'] = $field->options['minimum'];
 
-            if(isset($field->options['maximum']))
+            if( isset( $field->options['maximum'] ) && $field->options['maximum'] !== '')
                 $field_attributes['max'] = $field->options['maximum'];
 
             if($field->type === 'true-false' && isset($field->options['default']) && $field->options['default'] === 'checked')
@@ -241,8 +241,8 @@ namespace SW_WAPF\Includes\Classes
                 $field_attributes['step'] = $field->options['number_type'];
 
             return Enumerable::from($field_attributes)->join(function($value,$key){
-                if($value)
-                    return $key . '="' . esc_attr($value) .'"';
+                if( $value !== '' )
+                    return $key . '="' . esc_attr( $value ) .'"';
                 else return $key;
             },' ');
 
@@ -255,10 +255,13 @@ namespace SW_WAPF\Includes\Classes
 			        '' :
 			        esc_html( $field->options['p_content'] );
 	        }
+            
+            if( $field->type === 'number' ) {
+                return isset( $field->options['default'] ) && $field->options['default'] !== '' ? esc_attr( $field->options['default'] ) : '';
+            }
 
-            $value = empty($field->options['default']) ? '' : esc_html($field->options['default']);
+            return empty($field->options['default']) ? '' : esc_attr($field->options['default']);
 
-            return $value;
         }
 
         #endregion

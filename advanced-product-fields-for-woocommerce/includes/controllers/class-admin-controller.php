@@ -61,7 +61,7 @@ namespace SW_WAPF\Includes\Controllers {
                 (isset($_GET['page']) && $_GET['page'] === 'wapf-field-groups') ||
                 $this->is_screen(wapf_get_setting('cpts'))
             ) {
-                return 'Made with ❤️ by <a style="color:inherit;font-weight: bold;text-decoration: none;" href="https://www.studiowombat.com/" target="_blank">Studio Wombat</a>. If you like APF, <a style="color:inherit;font-weight: bold;text-decoration: none;" href="https://wordpress.org/support/plugin/advanced-product-fields-for-woocommerce/reviews/#new-post" target="_blank">please rate us ⭐⭐⭐⭐⭐</a>';
+                return '<div style="font-size: 1.13em;padding:15px;background:#fff;border:1px solid #c4c4c7">This plugin is free - if you find it useful, please <a style="color:inherit;font-weight: bold;text-decoration: none;" href="https://wordpress.org/support/plugin/advanced-product-fields-for-woocommerce/reviews/#new-post" target="_blank">leave a quick ⭐⭐⭐⭐⭐ rating</a>. Your support helps the plugin grow and ensures we can keep improving the free version. <i>Thank you!</i></div>';
             }
         }
 
@@ -85,8 +85,8 @@ namespace SW_WAPF\Includes\Controllers {
 
                 wp_localize_script( 'wapf-admin-js', 'wapf_language', [
                     'title_required'        => __("Please add a field group title first.", 'advanced-product-fields-for-woocommerce'),
-                    'fields_required'       => __("Please add some fields first.", 'advanced-product-fields-for-woocommerce'),
-                    'fieldgroup_limit'      => __("You've reached the amount of field groups you can create in the free version. Please consider upgrading to premium to add unlimited field groups. Thank you!",'advanced-product-fields-for-woocommerce')
+                    'fields_required'       => __("Please add some input fields first.", 'advanced-product-fields-for-woocommerce'),
+                    'fieldgroup_limit'      => __("You've reached the amount of groups you can create in the free version. Please consider upgrading to premium to add unlimited field groups. Thank you!",'advanced-product-fields-for-woocommerce')
                 ]);
 
                 $localize_array = [
@@ -108,8 +108,8 @@ namespace SW_WAPF\Includes\Controllers {
 
             add_submenu_page(
                 'woocommerce',
-                __('Product Fields','advanced-product-fields-for-woocommerce'),
-                __('Product Fields','advanced-product-fields-for-woocommerce'),
+                __('Product Input Fields','advanced-product-fields-for-woocommerce'),
+                __('Product Input Fields','advanced-product-fields-for-woocommerce'),
                 $cap,
                 'wapf-field-groups',
                 [$this,'render_field_group_list']
@@ -164,11 +164,13 @@ namespace SW_WAPF\Includes\Controllers {
         #region WooCommerce product backend
 
         public function add_product_tab($tabs) {
+            
             $tabs['customfields'] = [
-                'label'		=> __( 'Custom fields', 'advanced-product-fields-for-woocommerce' ),
+                'label'		=> __( 'Product input fields', 'advanced-product-fields-for-woocommerce' ),
                 'target'	=> 'customfields_options',
                 'class'		=> ['show_if_simple', 'show_if_variable'],
             ];
+            
             return $tabs;
         }
 
@@ -176,7 +178,7 @@ namespace SW_WAPF\Includes\Controllers {
 
             echo '<div id="customfields_options" class="panel woocommerce_options_panel">';
 
-            echo '<h4 class="wapf-product-admin-title">' .  esc_html__('Fields','advanced-product-fields-for-woocommerce') .' &mdash; <span style="opacity:.5;">'. esc_html__('Add some custom fields to this group.','advanced-product-fields-for-woocommerce').'</span>' . '</h4>';
+            echo '<h4 class="wapf-product-admin-title">' .  esc_html__('Input Fields','advanced-product-fields-for-woocommerce') .' &mdash; <span style="opacity:.5;">'. esc_html__('Add some custom input fields to this group.','advanced-product-fields-for-woocommerce').'</span>' . '</h4>';
 
             $this->display_field_group_fields(true);
 
@@ -413,7 +415,7 @@ namespace SW_WAPF\Includes\Controllers {
 
                 add_meta_box(
                     'wapf-field-list',
-                    __('Fields','advanced-product-fields-for-woocommerce') .' &mdash; <span style="opacity:.5;">'.__('Add some custom fields to this group.','advanced-product-fields-for-woocommerce').'</span>',
+                    __('Inputs','advanced-product-fields-for-woocommerce') .' &mdash; <span style="opacity:.5;">'.__('Add some input fields to this group.','advanced-product-fields-for-woocommerce').'</span>',
                     [$this, 'display_field_group_fields'],
                     $cpts,
                     'normal',
@@ -422,7 +424,7 @@ namespace SW_WAPF\Includes\Controllers {
 
                 add_meta_box(
                     'wapf-field-group-conditions',
-                    __('Conditions','advanced-product-fields-for-woocommerce') .' &mdash; <span style="opacity:.5;">'.__('When should this field group be displayed?','advanced-product-fields-for-woocommerce').'</span>',
+                    __('Visibility conditions','advanced-product-fields-for-woocommerce') .' &mdash; <span style="opacity:.5;">'.__('When should these input fields be displayed?','advanced-product-fields-for-woocommerce').'</span>',
                     [$this, 'display_field_group_conditions'],
                     $cpts,
                     'normal',
@@ -431,7 +433,7 @@ namespace SW_WAPF\Includes\Controllers {
 
                 add_meta_box(
                     'wapf-field-group-layout',
-                    __('Layout','advanced-product-fields-for-woocommerce') .' &mdash; <span style="opacity:.5;">'.__('Field group layout settings','advanced-product-fields-for-woocommerce').'</span>',
+                    __('Layout','advanced-product-fields-for-woocommerce') .' &mdash; <span style="opacity:.5;">'.__('Various layout settings','advanced-product-fields-for-woocommerce').'</span>',
                     [$this, 'display_field_group_layout'],
                     $cpts,
                     'normal',

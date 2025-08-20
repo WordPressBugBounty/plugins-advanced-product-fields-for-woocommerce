@@ -13,7 +13,7 @@
 
             <div class="wapf-field__conditionals__container">
                 <div rv-if="fieldsForConditionals.fields | isEmpty" class="wapf-lighter">
-                    <?php esc_html_e('You need atleast 2 fields to create conditional rules. Add another field first.','advanced-product-fields-for-woocommerce');?>
+                    <?php esc_html_e('You need atleast 2 input fields for conditional logic. Add another input field first.','advanced-product-fields-for-woocommerce');?>
                 </div>
                 <div rv-if="fieldsForConditionals.fields | isNotEmpty">
                     <div rv-each-conditional="field.conditionals">

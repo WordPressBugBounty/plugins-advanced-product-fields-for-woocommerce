@@ -31,15 +31,16 @@ namespace SW_WAPF\Includes\Classes {
 
         }
 
-        public static function get_fieldgroup_counts(){
+        public static function get_fieldgroup_counts() {
 
-	        $count_cache = [ 'publish' => 0, 'draft' => 0, 'trash' => 0, 'all' => 0 ];
+	        $count_cache = [ 'publish' => 0, 'draft' => 0, 'trash' => 0, 'private' => 0 ];
 
 	        foreach(wapf_get_setting('cpts') as $cpt) {
 		        $count = wp_count_posts($cpt);
 		        $count_cache['publish'] += $count->publish;
 		        $count_cache['trash'] += $count->trash;
 		        $count_cache['draft'] += $count->draft;
+                $count_cache['private'] += $count->private;
 	        }
 
 	        $count_cache['all'] = $count_cache['publish'] + $count_cache['draft'];

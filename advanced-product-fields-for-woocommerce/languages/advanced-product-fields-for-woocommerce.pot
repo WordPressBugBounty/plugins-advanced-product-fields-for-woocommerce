@@ -13,7 +13,7 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: dist/class-wapf.php:78, dist/includes/controllers/class-admin-controller.php:558
+#: dist/class-wapf.php:78, dist/includes/controllers/class-admin-controller.php:560
 msgid "Product Field Groups"
 msgstr ""
 
@@ -158,7 +158,7 @@ msgid "Text"
 msgstr ""
 
 #: dist/includes/classes/class-fields.php:21
-msgid "Text Area"
+msgid "Multi-line text"
 msgstr ""
 
 #: dist/includes/classes/class-fields.php:26
@@ -230,142 +230,154 @@ msgid "Calculation"
 msgstr ""
 
 #: dist/includes/classes/class-fields.php:111
-msgid "Content: shortcodes & HTML"
+msgid "Child Products"
 msgstr ""
 
 #: dist/includes/classes/class-fields.php:116
-msgid "Content: image"
+msgid "Horizontal Cards"
 msgstr ""
 
 #: dist/includes/classes/class-fields.php:121
+msgid "Vertical Cards"
+msgstr ""
+
+#: dist/includes/classes/class-fields.php:126
+msgid "Content: shortcodes & HTML"
+msgstr ""
+
+#: dist/includes/classes/class-fields.php:131
+msgid "Content: image"
+msgstr ""
+
+#: dist/includes/classes/class-fields.php:136
 msgid "Layout: section"
 msgstr ""
 
-#: dist/includes/classes/class-fields.php:140
+#: dist/includes/classes/class-fields.php:155
 msgid "Message"
 msgstr ""
 
-#: dist/includes/classes/class-fields.php:141
+#: dist/includes/classes/class-fields.php:156
 msgid "Displays text alongside the checkbox."
 msgstr ""
 
-#: dist/includes/classes/class-fields.php:146
+#: dist/includes/classes/class-fields.php:161
 msgid "Checked"
 msgstr ""
 
-#: dist/includes/classes/class-fields.php:147
+#: dist/includes/classes/class-fields.php:162
 msgid "Unchecked"
 msgstr ""
 
-#: dist/includes/classes/class-fields.php:151, dist/includes/classes/class-fields.php:166, dist/includes/classes/class-fields.php:187, dist/includes/classes/class-fields.php:219, dist/includes/classes/class-fields.php:252, dist/includes/classes/class-fields.php:274
+#: dist/includes/classes/class-fields.php:166, dist/includes/classes/class-fields.php:181, dist/includes/classes/class-fields.php:202, dist/includes/classes/class-fields.php:234, dist/includes/classes/class-fields.php:267, dist/includes/classes/class-fields.php:289
 msgid "Default value"
 msgstr ""
 
-#: dist/includes/classes/class-fields.php:152, dist/includes/classes/class-fields.php:167, dist/includes/classes/class-fields.php:188, dist/includes/classes/class-fields.php:220, dist/includes/classes/class-fields.php:253, dist/includes/classes/class-fields.php:275
+#: dist/includes/classes/class-fields.php:167, dist/includes/classes/class-fields.php:182, dist/includes/classes/class-fields.php:203, dist/includes/classes/class-fields.php:235, dist/includes/classes/class-fields.php:268, dist/includes/classes/class-fields.php:290
 msgid "The pre-set value of the field when the page loads."
 msgstr ""
 
-#: dist/includes/classes/class-fields.php:157, dist/includes/classes/class-fields.php:178, dist/includes/classes/class-fields.php:199, dist/includes/classes/class-fields.php:243, dist/includes/classes/class-fields.php:265, dist/includes/classes/class-fields.php:286, dist/views/admin/settings/options.php:19
+#: dist/includes/classes/class-fields.php:172, dist/includes/classes/class-fields.php:193, dist/includes/classes/class-fields.php:214, dist/includes/classes/class-fields.php:258, dist/includes/classes/class-fields.php:280, dist/includes/classes/class-fields.php:301, dist/views/admin/settings/options.php:19
 msgid "Adjust pricing"
 msgstr ""
 
-#: dist/includes/classes/class-fields.php:158, dist/includes/classes/class-fields.php:179, dist/includes/classes/class-fields.php:200, dist/includes/classes/class-fields.php:244, dist/includes/classes/class-fields.php:266, dist/includes/classes/class-fields.php:287
+#: dist/includes/classes/class-fields.php:173, dist/includes/classes/class-fields.php:194, dist/includes/classes/class-fields.php:215, dist/includes/classes/class-fields.php:259, dist/includes/classes/class-fields.php:281, dist/includes/classes/class-fields.php:302
 msgid "Should the price of the product or cart change when the user interacts with this field?"
 msgstr ""
 
-#: dist/includes/classes/class-fields.php:172, dist/includes/classes/class-fields.php:193, dist/includes/classes/class-fields.php:225, dist/includes/classes/class-fields.php:258, dist/includes/classes/class-fields.php:280
+#: dist/includes/classes/class-fields.php:187, dist/includes/classes/class-fields.php:208, dist/includes/classes/class-fields.php:240, dist/includes/classes/class-fields.php:273, dist/includes/classes/class-fields.php:295
 msgid "Placeholder text"
 msgstr ""
 
-#: dist/includes/classes/class-fields.php:173, dist/includes/classes/class-fields.php:194, dist/includes/classes/class-fields.php:226, dist/includes/classes/class-fields.php:259, dist/includes/classes/class-fields.php:281
+#: dist/includes/classes/class-fields.php:188, dist/includes/classes/class-fields.php:209, dist/includes/classes/class-fields.php:241, dist/includes/classes/class-fields.php:274, dist/includes/classes/class-fields.php:296
 msgid "Appears within the input field"
 msgstr ""
 
-#: dist/includes/classes/class-fields.php:208
+#: dist/includes/classes/class-fields.php:223
 msgid "Number type"
 msgstr ""
 
-#: dist/includes/classes/class-fields.php:209
+#: dist/includes/classes/class-fields.php:224
 msgid "Allow integers (whole numbers) or decimals."
 msgstr ""
 
-#: dist/includes/classes/class-fields.php:211
+#: dist/includes/classes/class-fields.php:226
 msgid "Integer"
 msgstr ""
 
-#: dist/includes/classes/class-fields.php:212
+#: dist/includes/classes/class-fields.php:227
 msgid "Integer & decimals"
 msgstr ""
 
-#: dist/includes/classes/class-fields.php:231
+#: dist/includes/classes/class-fields.php:246
 msgid "Minimum value"
 msgstr ""
 
-#: dist/includes/classes/class-fields.php:232
+#: dist/includes/classes/class-fields.php:247
 msgid "No minimum"
 msgstr ""
 
-#: dist/includes/classes/class-fields.php:237
+#: dist/includes/classes/class-fields.php:252
 msgid "Maximum value"
 msgstr ""
 
-#: dist/includes/classes/class-fields.php:238
+#: dist/includes/classes/class-fields.php:253
 msgid "No maximum"
 msgstr ""
 
-#: dist/includes/classes/class-fields.php:295, dist/includes/classes/class-fields.php:306, dist/includes/classes/class-fields.php:318
+#: dist/includes/classes/class-fields.php:310, dist/includes/classes/class-fields.php:321, dist/includes/classes/class-fields.php:333
 msgid "Options"
 msgstr ""
 
-#: dist/includes/classes/class-fields.php:296
+#: dist/includes/classes/class-fields.php:311
 msgid "Add the options for this select list."
 msgstr ""
 
-#: dist/includes/classes/class-fields.php:307
+#: dist/includes/classes/class-fields.php:322
 msgid "Each option is a checkbox."
 msgstr ""
 
-#: dist/includes/classes/class-fields.php:319
+#: dist/includes/classes/class-fields.php:334
 msgid "Each option is a radio button."
 msgstr ""
 
-#: dist/includes/classes/class-fields.php:329, dist/includes/classes/class-fields.php:337
+#: dist/includes/classes/class-fields.php:344, dist/includes/classes/class-fields.php:352
 msgid "Content"
 msgstr ""
 
-#: dist/includes/classes/class-fields.php:330, dist/includes/classes/class-fields.php:338
+#: dist/includes/classes/class-fields.php:345, dist/includes/classes/class-fields.php:353
 msgid "Enter your text here. Do you need to add shortcodes & HTML? Consider upgrading to our Pro version."
 msgstr ""
 
-#: dist/includes/classes/class-fields.php:417
+#: dist/includes/classes/class-fields.php:432
 msgid "Flat fee (not quantity-based)"
 msgstr ""
 
-#: dist/includes/classes/class-fields.php:418
+#: dist/includes/classes/class-fields.php:433
 msgid "Quantity based flat fee (Pro only)"
 msgstr ""
 
-#: dist/includes/classes/class-fields.php:419
+#: dist/includes/classes/class-fields.php:434
 msgid "Formula/calculation (Pro only)"
 msgstr ""
 
-#: dist/includes/classes/class-fields.php:420
+#: dist/includes/classes/class-fields.php:435
 msgid "Percentage based (Pro only)"
 msgstr ""
 
-#: dist/includes/classes/class-fields.php:421
-msgid "Amount &times; field value (Pro only)"
+#: dist/includes/classes/class-fields.php:436
+msgid "Amount & field value (Pro only)"
 msgstr ""
 
-#: dist/includes/classes/class-fields.php:422
-msgid "Amount &times; character count (Pro only)"
+#: dist/includes/classes/class-fields.php:437
+msgid "Amount & character count (Pro only)"
 msgstr ""
 
-#: dist/includes/classes/class-fields.php:439, dist/includes/classes/class-fields.php:450
+#: dist/includes/classes/class-fields.php:454, dist/includes/classes/class-fields.php:465
 msgid "true"
 msgstr ""
 
-#: dist/includes/classes/class-fields.php:439, dist/includes/classes/class-fields.php:450
+#: dist/includes/classes/class-fields.php:454, dist/includes/classes/class-fields.php:465
 msgid "false"
 msgstr ""
 
@@ -381,7 +393,7 @@ msgstr ""
 msgid "Type"
 msgstr ""
 
-#: dist/includes/classes/class-wapf-list-table.php:17, dist/includes/controllers/class-admin-controller.php:179, dist/includes/controllers/class-admin-controller.php:416
+#: dist/includes/classes/class-wapf-list-table.php:17
 msgid "Fields"
 msgstr ""
 
@@ -467,6 +479,10 @@ msgstr ""
 msgid "Draft"
 msgstr ""
 
+#: dist/includes/classes/class-wapf-list-table.php:155
+msgid "Private"
+msgstr ""
+
 #: dist/includes/classes/class-wapf-list-table.php:181
 msgid "No Product Field Groups found."
 msgstr ""
@@ -492,15 +508,15 @@ msgid "Please add a field group title first."
 msgstr ""
 
 #: dist/includes/controllers/class-admin-controller.php:88
-msgid "Please add some fields first."
+msgid "Please add some input fields first."
 msgstr ""
 
 #: dist/includes/controllers/class-admin-controller.php:89
-msgid "You've reached the amount of field groups you can create in the free version. Please consider upgrading to premium to add unlimited field groups. Thank you!"
+msgid "You've reached the amount of groups you can create in the free version. Please consider upgrading to premium to add unlimited field groups. Thank you!"
 msgstr ""
 
 #: dist/includes/controllers/class-admin-controller.php:111, dist/includes/controllers/class-admin-controller.php:112
-msgid "Product Fields"
+msgid "Product Input Fields"
 msgstr ""
 
 #: dist/includes/controllers/class-admin-controller.php:121
@@ -515,72 +531,88 @@ msgstr ""
 msgid "Copy"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:168
-msgid "Custom fields"
+#: dist/includes/controllers/class-admin-controller.php:169
+msgid "Product input fields"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:179, dist/includes/controllers/class-admin-controller.php:416
-msgid "Add some custom fields to this group."
+#: dist/includes/controllers/class-admin-controller.php:181
+msgid "Input Fields"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:188, dist/includes/controllers/class-admin-controller.php:434
+#: dist/includes/controllers/class-admin-controller.php:181
+msgid "Add some custom input fields to this group."
+msgstr ""
+
+#: dist/includes/controllers/class-admin-controller.php:190, dist/includes/controllers/class-admin-controller.php:436
 msgid "Layout"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:188, dist/includes/controllers/class-admin-controller.php:434
+#: dist/includes/controllers/class-admin-controller.php:190
 msgid "Field group layout settings"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:222
+#: dist/includes/controllers/class-admin-controller.php:224
 msgid "Product field settings"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:227
+#: dist/includes/controllers/class-admin-controller.php:229
 msgid "Show in cart"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:231
+#: dist/includes/controllers/class-admin-controller.php:233
 msgid "Show on customer's cart page."
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:232
+#: dist/includes/controllers/class-admin-controller.php:234
 msgid "When a user has filled out your fields, should they be summarized on their cart page after adding the product to their cart?"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:236
+#: dist/includes/controllers/class-admin-controller.php:238
 msgid "Show on checkout"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:240
+#: dist/includes/controllers/class-admin-controller.php:242
 msgid "Show on the checkout page."
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:241
+#: dist/includes/controllers/class-admin-controller.php:243
 msgid "When a user has filled out your fields, should they be summarized on their checkout page?"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:245
+#: dist/includes/controllers/class-admin-controller.php:247
 msgid "\"Add to cart\" button text"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:248
+#: dist/includes/controllers/class-admin-controller.php:250
 msgid "When a product has custom fields, what should the \"add to cart\" button say?"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:249, dist/includes/controllers/class-product-controller.php:121
+#: dist/includes/controllers/class-admin-controller.php:251, dist/includes/controllers/class-product-controller.php:121
 msgid "Select options"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:260
+#: dist/includes/controllers/class-admin-controller.php:262
 msgid "Product fields"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:425
-msgid "Conditions"
+#: dist/includes/controllers/class-admin-controller.php:418
+msgid "Inputs"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:425
-msgid "When should this field group be displayed?"
+#: dist/includes/controllers/class-admin-controller.php:418
+msgid "Add some input fields to this group."
+msgstr ""
+
+#: dist/includes/controllers/class-admin-controller.php:427
+msgid "Visibility conditions"
+msgstr ""
+
+#: dist/includes/controllers/class-admin-controller.php:427
+msgid "When should these input fields be displayed?"
+msgstr ""
+
+#: dist/includes/controllers/class-admin-controller.php:436
+msgid "Various layout settings"
 msgstr ""
 
 #: dist/includes/controllers/class-product-controller.php:150
@@ -612,12 +644,16 @@ msgstr ""
 msgid "And"
 msgstr ""
 
+#: dist/views/admin/cpt-list-table.php:18
+msgid "A field group is a collection of fields that belong together."
+msgstr ""
+
 #: dist/views/admin/field-list.php:17
-msgid "Add your 1st Field"
+msgid "Add Input Field"
 msgstr ""
 
 #: dist/views/admin/field-list.php:30
-msgid "Add a Field"
+msgid "Add an Input"
 msgstr ""
 
 #: dist/views/admin/field.php:71
@@ -657,11 +693,11 @@ msgid "Should this field be repeated multiple times either by a button or quanti
 msgstr ""
 
 #: dist/views/admin/field.php:131
-msgid "Conditionals"
+msgid "Conditional logic"
 msgstr ""
 
 #: dist/views/admin/field.php:132
-msgid "Only show this field when conditional rules are true."
+msgid "Only show this field when certain rules are true."
 msgstr ""
 
 #: dist/views/admin/field.php:141
@@ -733,11 +769,11 @@ msgid "Width"
 msgstr ""
 
 #: dist/views/admin/settings/attributes.php:25
-msgid "Class"
+msgid "CSS Class"
 msgstr ""
 
 #: dist/views/admin/settings/conditionals.php:16
-msgid "You need atleast 2 fields to create conditional rules. Add another field first."
+msgid "You need atleast 2 input fields for conditional logic. Add another input field first."
 msgstr ""
 
 #: dist/views/admin/settings/conditionals.php:40

@@ -18,7 +18,7 @@ namespace SW_WAPF\Includes\Classes {
 				],
 				[
 					'id'    => 'textarea',
-					'title' => __('Text Area','advanced-product-fields-for-woocommerce'),
+					'title' => __('Multi-line text','advanced-product-fields-for-woocommerce'),
 					'pro'   => false,
 				],
 				[
@@ -104,6 +104,21 @@ namespace SW_WAPF\Includes\Classes {
                 [
                     'id'    => 'calc',
                     'title' => __('Calculation','advanced-product-fields-for-woocommerce'),
+                    'pro'   => true,
+                ],
+                [
+                    'id'    => 'products',
+                    'title' => __('Child Products','advanced-product-fields-for-woocommerce'),
+                    'pro'   => true,
+                ],
+                [
+                    'id'    => 'hcards',
+                    'title' => __('Horizontal Cards','advanced-product-fields-for-woocommerce'),
+                    'pro'   => true,
+                ],
+                [
+                    'id'    => 'vcards',
+                    'title' => __('Vertical Cards','advanced-product-fields-for-woocommerce'),
                     'pro'   => true,
                 ],
 				[
@@ -418,8 +433,8 @@ namespace SW_WAPF\Includes\Classes {
                 'qt'        => [ 'label' => __('Quantity based flat fee (Pro only)', 'advanced-product-fields-for-woocommerce'), 'pro' => true ],
                 'fx'        => [ 'label' => __('Formula/calculation (Pro only)', 'advanced-product-fields-for-woocommerce'), 'pro' => true ],
                 'percent'   => [ 'label' => __('Percentage based (Pro only)', 'advanced-product-fields-for-woocommerce'), 'pro' => true ],
-                'nr'        => [ 'label' => __('Amount &times; field value (Pro only)', 'advanced-product-fields-for-woocommerce'), 'pro' => true ],
-                'char'      => [ 'label' => __('Amount &times; character count (Pro only)', 'advanced-product-fields-for-woocommerce'), 'pro' => true ],
+                'nr'        => [ 'label' => __('Amount & field value (Pro only)', 'advanced-product-fields-for-woocommerce'), 'pro' => true ],
+                'char'      => [ 'label' => __('Amount & character count (Pro only)', 'advanced-product-fields-for-woocommerce'), 'pro' => true ],
             ];
 
             return $options;

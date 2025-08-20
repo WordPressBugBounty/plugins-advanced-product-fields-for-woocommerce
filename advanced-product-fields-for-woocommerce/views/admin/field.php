@@ -128,8 +128,8 @@ $field_types = \SW_WAPF\Includes\Classes\Fields::get_field_types();
         Html::setting([
             'type'              => 'conditionals',
             'id'                => 'conditionals',
-            'label'             => __('Conditionals','advanced-product-fields-for-woocommerce'),
-            'description'       => __('Only show this field when conditional rules are true.','advanced-product-fields-for-woocommerce'),
+            'label'             => __('Conditional logic','advanced-product-fields-for-woocommerce'),
+            'description'       => __('Only show this field when certain rules are true.','advanced-product-fields-for-woocommerce'),
             'is_field_setting'  => true
         ]);
 

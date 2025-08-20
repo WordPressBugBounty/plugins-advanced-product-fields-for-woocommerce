@@ -22,7 +22,7 @@
             </div>
         </div>
         <div style="width:48%; padding-left:2%;">
-            <div class="wapf-input-prepend"><?php esc_html_e('Class','advanced-product-fields-for-woocommerce'); ?></div>
+            <div class="wapf-input-prepend"><?php esc_html_e('CSS Class','advanced-product-fields-for-woocommerce'); ?></div>
             <div class="wapf-input-with-prepend-append">
                 <input
                     rv-on-keyup="onChange"

@@ -14,7 +14,9 @@
         <?php } ?>
     </h2>
 
-    <p style="padding-bottom:22px;margin:0 !important;" class="wapf-description">A field group is a collection of fields that belong together.</p>
+    <p style="padding-bottom:22px;margin:0 !important;" class="wapf-description">
+        <?php _e( 'A field group is a collection of fields that belong together.', 'advanced-product-fields-for-woocommerce' ) ?>
+    </p>
     <div id="nds-wp-list-table-demo">
         <div id="nds-post-body">
             <?php $list->views(); ?>

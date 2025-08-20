@@ -2,11 +2,11 @@
 Contributors: studiowombat,maartenbelmans
 Tags: woocommerce product addons, woocommerce, woocommerce product options, product addons, product fields
 Requires at least: 4.5
-Tested up to: 6.8.1
+Tested up to: 6.8.2
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.6.16
+Stable tag: 1.6.17
 
 Add options (addons) to your WooCommerce products so your customers can personalize their products. Product forms for everyone!
 
@@ -166,6 +166,10 @@ From your WordPress dashboard
 
 == Changelog ==
 
+= 1.6.17 =
+ * Improvement: the "Field groups" list now also displays private groups.
+ * Improvement: translation improvements.
+ 
 = 1.6.16 =
  * Improvement: improved compatibility with variable products and the pricing summary.
  * Fix: fixed an issue where the default value "0" wouldn't be shown on number fields.

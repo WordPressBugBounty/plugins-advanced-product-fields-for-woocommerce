@@ -152,7 +152,7 @@ namespace SW_WAPF\Includes\Classes {
                 '<strong><a class="row-title" href="%s">%s</a>%s</strong>%s',
                 get_edit_post_link($post->ID),
                 esc_html($title),
-                $post->post_status === 'draft' ? ' &mdash; <span class="post-state">'.__('Draft', 'advanced-product-fields-for-woocommerce').'</span>' : '',
+                $post->post_status === 'draft' || $post->post_status === 'private' ? ' &mdash; <span class="post-state">' . ( $post->post_status === 'draft' ? __('Draft','advanced-product-fields-for-woocommerce') : __('Private','advanced-product-fields-for-woocommerce') ) . '</span>' : '',
                 $this->row_actions($actions)
             );
 
@@ -248,7 +248,7 @@ namespace SW_WAPF\Includes\Classes {
                 'post_type'     => wapf_get_setting('cpts'),
                 'numberposts'   => $items_per_page,
                 'paged'         => $page,
-                'post_status'   => $status === 'all' ? ['publish','draft'] : $status
+                'post_status'   => $status === 'all' ? [ 'publish', 'draft', 'future', 'pending', 'private' ] : $status
             ];
 
             // Pagination

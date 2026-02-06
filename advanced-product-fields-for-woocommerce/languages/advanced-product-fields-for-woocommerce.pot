@@ -13,7 +13,7 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: dist/class-wapf.php:78, dist/includes/controllers/class-admin-controller.php:560
+#: dist/class-wapf.php:78, dist/includes/controllers/class-admin-controller.php:572
 msgid "Product Field Groups"
 msgstr ""
 
@@ -425,7 +425,7 @@ msgstr ""
 msgid "Missed schedule"
 msgstr ""
 
-#: dist/includes/classes/class-wapf-list-table.php:57, dist/includes/classes/class-wapf-list-table.php:222
+#: dist/includes/classes/class-wapf-list-table.php:57, dist/includes/classes/class-wapf-list-table.php:233
 msgid "Published"
 msgstr ""
 
@@ -439,63 +439,63 @@ msgid "Edit"
 msgstr ""
 
 #. translators: post title
-#: dist/includes/classes/class-wapf-list-table.php:111
+#: dist/includes/classes/class-wapf-list-table.php:122
 msgid "Duplicate &#8220;%s&#8221;"
 msgstr ""
 
-#: dist/includes/classes/class-wapf-list-table.php:112
+#: dist/includes/classes/class-wapf-list-table.php:123
 msgid "Duplicate"
 msgstr ""
 
 #. translators: post title
-#: dist/includes/classes/class-wapf-list-table.php:124
+#: dist/includes/classes/class-wapf-list-table.php:135
 msgid "Restore &#8220;%s&#8221; from the Trash"
 msgstr ""
 
-#: dist/includes/classes/class-wapf-list-table.php:125
+#: dist/includes/classes/class-wapf-list-table.php:136
 msgid "Restore"
 msgstr ""
 
 #. translators: post title
-#: dist/includes/classes/class-wapf-list-table.php:134
+#: dist/includes/classes/class-wapf-list-table.php:145
 msgid "Delete &#8220;%s&#8221; permanently"
 msgstr ""
 
-#: dist/includes/classes/class-wapf-list-table.php:135
+#: dist/includes/classes/class-wapf-list-table.php:146
 msgid "Delete Permanently"
 msgstr ""
 
 #. translators: post title
-#: dist/includes/classes/class-wapf-list-table.php:144
+#: dist/includes/classes/class-wapf-list-table.php:155
 msgid "Move &#8220;%s&#8221; to the Trash"
 msgstr ""
 
-#: dist/includes/classes/class-wapf-list-table.php:145
+#: dist/includes/classes/class-wapf-list-table.php:156
 msgctxt "verb"
 msgid "Trash"
 msgstr ""
 
-#: dist/includes/classes/class-wapf-list-table.php:155, dist/includes/classes/class-wapf-list-table.php:225
+#: dist/includes/classes/class-wapf-list-table.php:166, dist/includes/classes/class-wapf-list-table.php:236
 msgid "Draft"
 msgstr ""
 
-#: dist/includes/classes/class-wapf-list-table.php:155
+#: dist/includes/classes/class-wapf-list-table.php:166
 msgid "Private"
 msgstr ""
 
-#: dist/includes/classes/class-wapf-list-table.php:181
+#: dist/includes/classes/class-wapf-list-table.php:192
 msgid "No Product Field Groups found."
 msgstr ""
 
-#: dist/includes/classes/class-wapf-list-table.php:188
+#: dist/includes/classes/class-wapf-list-table.php:199
 msgid "Move to Trash"
 msgstr ""
 
-#: dist/includes/classes/class-wapf-list-table.php:219
+#: dist/includes/classes/class-wapf-list-table.php:230
 msgid "All"
 msgstr ""
 
-#: dist/includes/classes/class-wapf-list-table.php:228
+#: dist/includes/classes/class-wapf-list-table.php:239
 msgid "Trash"
 msgstr ""
 
@@ -527,91 +527,91 @@ msgstr ""
 msgid "Global fields"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:152
+#: dist/includes/controllers/class-admin-controller.php:162
 msgid "Copy"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:169
+#: dist/includes/controllers/class-admin-controller.php:181
 msgid "Product input fields"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:181
+#: dist/includes/controllers/class-admin-controller.php:193
 msgid "Input Fields"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:181
+#: dist/includes/controllers/class-admin-controller.php:193
 msgid "Add some custom input fields to this group."
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:190, dist/includes/controllers/class-admin-controller.php:436
+#: dist/includes/controllers/class-admin-controller.php:202, dist/includes/controllers/class-admin-controller.php:448
 msgid "Layout"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:190
+#: dist/includes/controllers/class-admin-controller.php:202
 msgid "Field group layout settings"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:224
+#: dist/includes/controllers/class-admin-controller.php:236
 msgid "Product field settings"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:229
+#: dist/includes/controllers/class-admin-controller.php:241
 msgid "Show in cart"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:233
+#: dist/includes/controllers/class-admin-controller.php:245
 msgid "Show on customer's cart page."
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:234
+#: dist/includes/controllers/class-admin-controller.php:246
 msgid "When a user has filled out your fields, should they be summarized on their cart page after adding the product to their cart?"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:238
+#: dist/includes/controllers/class-admin-controller.php:250
 msgid "Show on checkout"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:242
+#: dist/includes/controllers/class-admin-controller.php:254
 msgid "Show on the checkout page."
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:243
+#: dist/includes/controllers/class-admin-controller.php:255
 msgid "When a user has filled out your fields, should they be summarized on their checkout page?"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:247
+#: dist/includes/controllers/class-admin-controller.php:259
 msgid "\"Add to cart\" button text"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:250
+#: dist/includes/controllers/class-admin-controller.php:262
 msgid "When a product has custom fields, what should the \"add to cart\" button say?"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:251, dist/includes/controllers/class-product-controller.php:121
+#: dist/includes/controllers/class-admin-controller.php:263, dist/includes/controllers/class-product-controller.php:121
 msgid "Select options"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:262
+#: dist/includes/controllers/class-admin-controller.php:274
 msgid "Product fields"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:418
+#: dist/includes/controllers/class-admin-controller.php:430
 msgid "Inputs"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:418
+#: dist/includes/controllers/class-admin-controller.php:430
 msgid "Add some input fields to this group."
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:427
+#: dist/includes/controllers/class-admin-controller.php:439
 msgid "Visibility conditions"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:427
+#: dist/includes/controllers/class-admin-controller.php:439
 msgid "When should these input fields be displayed?"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:436
+#: dist/includes/controllers/class-admin-controller.php:448
 msgid "Various layout settings"
 msgstr ""
 

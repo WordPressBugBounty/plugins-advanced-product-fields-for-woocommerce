@@ -104,9 +104,20 @@ namespace SW_WAPF\Includes\Classes {
                     __( 'Edit', 'advanced-product-fields-for-woocommerce' )
                 );
                 if($post->post_status === 'publish') {
+
+                    $url = add_query_arg(
+                        [
+                            'page' => 'wapf-field-groups',
+                            'wapf_duplicate' => $post->ID,
+                        ],
+                        admin_url( 'admin.php' )
+                    );
+
+                    $url = wp_nonce_url( $url, 'wapf_duplicate', '_dupenonce' );
+                    
                     $actions['duplicate'] = sprintf(
                         '<a href="%s" aria-label="%s">%s</a>',
-                        admin_url('admin.php?page=wapf-field-groups&wapf_duplicate='.$post->ID),
+                        esc_url( $url ),
                         /* translators: post title */
                         esc_attr( sprintf( __( 'Duplicate &#8220;%s&#8221;','advanced-product-fields-for-woocommerce' ), $title ) ),
                         __( 'Duplicate', 'advanced-product-fields-for-woocommerce' )

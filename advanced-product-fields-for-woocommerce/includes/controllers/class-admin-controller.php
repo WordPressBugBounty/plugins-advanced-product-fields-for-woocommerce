@@ -138,6 +138,16 @@ namespace SW_WAPF\Includes\Controllers {
             if(!$post)
                 return false;
 
+            // Capability check for safety
+            if ( ! current_user_can( wapf_get_setting('capability') ) ) {
+                return false;
+            }
+
+            // Nonce check
+            if ( empty( $_GET['_dupenonce'] ) || ! wp_verify_nonce( $_GET['_dupenonce'], 'wapf_duplicate' ) ) {
+                return false;
+            }
+
             $fg = Field_Groups::get_by_id($post_id);
 	        if(empty($fg))
 		        return false;
@@ -156,7 +166,9 @@ namespace SW_WAPF\Includes\Controllers {
                 remove_action( 'save_post_' . $cpt, [$this, 'save_post'],10 );
             }
 
-            return true;
+            wp_safe_redirect( remove_query_arg([ 'wapf_duplicate', '_dupenonce' ]) );
+            exit;
+            
         }
 
         #endregion

@@ -126,49 +126,50 @@ namespace SW_WAPF\Includes\Controllers {
 
 	    public function validate_cart_data($passed, $product_id, $qty, $variation_id = null, $variations = null, $cart_item_data = null) {
 
-        	// No hidden field given and we're not adding to cart via a URL
-		    if( ! isset( $_REQUEST['wapf_field_groups'] ) && ! isset( $_GET['add-to-cart'] ) )
-			    return $passed;
-
-		    // No field groups, so our plugin isn't active on this product.
 		    $field_groups = Field_Groups::get_field_groups_of_product( $product_id );
+
+		    // No field groups, so this product is not using our plugin.
 		    if( empty( $field_groups ) )
 			    return $passed;
 
-		    $skip_fieldgroup_validation = false;
-		    $is_order_again =  isset( $cart_item_data['wapf_order_again'] ) && $cart_item_data['wapf_order_again'];
-		    if( ! empty( $cart_item_data ) && $is_order_again )
-			    $skip_fieldgroup_validation = true;
+		    $is_order_again    = isset( $cart_item_data['wapf_order_again'] ) && $cart_item_data['wapf_order_again'];
+		    $field_group_ids   = isset( $_REQUEST['wapf_field_groups'] ) ? sanitize_text_field( $_REQUEST['wapf_field_groups'] ) : false;
+		    $is_url_add_to_cart = isset( $_GET['add-to-cart'] ) && is_numeric( $_GET['add-to-cart'] ) && ! $field_group_ids;
 
-		    if( ! $skip_fieldgroup_validation) {
+		    // Field group integrity check: wapf_field_groups must be present and match server-side groups.
+		    // Skipped for order-again (no form submitted) and URL add-to-cart (no APF form).
+		    if( ! $is_order_again && ! $is_url_add_to_cart ) {
 
-			    if ( isset( $_REQUEST['wapf_field_groups'] ) ) {
-
-				    $field_group_ids = explode( ',', sanitize_text_field( $_REQUEST['wapf_field_groups'] ) );
-				    foreach ( $field_groups as $fg ) {
-					    if ( ! in_array( $fg->id, $field_group_ids ) ) {
-						    wc_add_notice( esc_html( __( 'Error adding product to cart.', 'advanced-product-fields-for-woocommerce' ) ), 'error' );
-
-						    return false;
-					    }
-				    }
-
+			    // wapf_field_groups missing on a product that has APF groups = tampered request.
+			    if( ! isset( $_REQUEST['wapf_field_groups'] ) ) {
+				    wc_add_notice( esc_html( __( 'Error adding product to cart.', 'advanced-product-fields-for-woocommerce' ) ), 'error' );
+				    return false;
 			    }
 
+			    $field_group_ids = explode( ',', $field_group_ids );
+			    foreach ( $field_groups as $fg ) {
+				    if ( ! in_array( $fg->id, $field_group_ids ) ) {
+					    wc_add_notice( esc_html( __( 'Error adding product to cart.', 'advanced-product-fields-for-woocommerce' ) ), 'error' );
+					    return false;
+				    }
+			    }
+
+		    }
+
+		    // Required fields check. Skipped only for order-again (values come from stored order, not $_REQUEST).
+		    if( ! $is_order_again ) {
 			    foreach ( $field_groups as $group ) {
 				    foreach ( $group->fields as $field ) {
 
-					    // Our validation. For now, only checks "required"
-					    if ( ! Fields::should_field_be_filled_out( $group, $field ) ) {
+					    // Our validation. For now, only checks "required".
+					    if ( ! Fields::should_field_be_filled_out( $group, $field ) )
 						    continue;
-					    }
 
 					    $value = Fields::get_raw_field_value_from_request( $field, 0, true );
 
 					    if ( empty( $value ) ) {
-                            /* translators: %s points to the field's label as given in the admin settings */
+						    /* translators: %s points to the field's label as given in the admin settings */
 						    wc_add_notice( sprintf( __( 'The field "%s" is required.', 'advanced-product-fields-for-woocommerce' ), esc_html( $field->label ) ), 'error' );
-
 						    return false;
 					    }
 				    }
@@ -416,9 +417,9 @@ namespace SW_WAPF\Includes\Controllers {
                 'id'                => $field->id,
                 'type'              => $field->type,
 	            'raw'               => is_string( $raw_value ) ? sanitize_textarea_field( $raw_value ) : array_map('sanitize_textarea_field', $raw_value),
-                'value'             => Fields::value_to_string($field, $raw_value, $price_addition > 0, $product),
+                'value'             => Fields::value_to_string($field, $raw_value, ! empty( $price_addition ), $product),
                 // Cart may have different tax settings, so we should also have a value_cart to use in cart/checkout.
-                'value_cart'        => Fields::value_to_string($field, $raw_value, $price_addition > 0, $product,'cart'),
+                'value_cart'        => Fields::value_to_string($field, $raw_value, !empty( $price_addition ), $product,'cart'),
                 'price'             => $price_addition,
                 'label'             => esc_html($field->label),
             ];

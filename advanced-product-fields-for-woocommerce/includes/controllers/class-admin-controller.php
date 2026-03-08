@@ -46,9 +46,6 @@ namespace SW_WAPF\Includes\Controllers {
 
             // Ajax
             add_action('wp_ajax_wapf_search_products',                          [$this, 'search_woo_products']);
-            add_action('wp_ajax_wapf_search_tags',                              [$this, 'search_woo_tags']);
-            add_action('wp_ajax_wapf_search_cat',                               [$this, 'search_woo_categories']);
-            add_action('wp_ajax_wapf_search_variations',                        [$this, 'search_woo_variations']);
 
             add_filter('admin_footer_text',                                     [$this, 'change_footer']);
 
@@ -163,7 +160,7 @@ namespace SW_WAPF\Includes\Controllers {
 
             // Re-hook
             foreach(wapf_get_setting('cpts') as $cpt) {
-                remove_action( 'save_post_' . $cpt, [$this, 'save_post'],10 );
+                add_action( 'save_post_' . $cpt, [$this, 'save_post'],10 );
             }
 
             wp_safe_redirect( remove_query_arg([ 'wapf_duplicate', '_dupenonce' ]) );
@@ -277,40 +274,6 @@ namespace SW_WAPF\Includes\Controllers {
         #endregion
 
         #region Ajax Functions
-
-        public function search_woo_categories() {
-
-            if( !current_user_can(wapf_get_setting('capability')) ) {
-                echo json_encode([]);
-                wp_die();
-            }
-
-            echo json_encode(Woocommerce_Service::find_category_by_name($_POST['q']));
-            wp_die();
-        }
-
-        public function search_woo_tags() {
-
-            if( !current_user_can(wapf_get_setting('capability')) ) {
-                echo json_encode([]);
-                wp_die();
-            }
-
-            echo json_encode(Woocommerce_Service::find_tags_by_name($_POST['q']));
-            wp_die();
-        }
-
-        public function search_woo_variations() {
-
-            if( !current_user_can(wapf_get_setting('capability')) ) {
-                echo json_encode([]);
-                wp_die();
-            }
-
-            echo json_encode(Woocommerce_Service::find_variations_by_name($_POST['q']));
-            wp_die();
-        }
-
         public function search_woo_products() {
 
             if( !current_user_can(wapf_get_setting('capability')) ) {
@@ -388,7 +351,7 @@ namespace SW_WAPF\Includes\Controllers {
 
                 // Re-hook
                 foreach(wapf_get_setting('cpts') as $cpt) {
-                    remove_action( 'save_post_' . $cpt, [$this, 'save_post'],10 );
+                    add_action( 'save_post_' . $cpt, [$this, 'save_post'],10 );
                 }
             } else {
                 $fg->id = 'p_' . $fg->id; // Prefix the ID so we know this is from a single product instead of the custom post type.

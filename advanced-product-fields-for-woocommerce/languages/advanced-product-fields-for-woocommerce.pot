@@ -1,4 +1,4 @@
-# Copyright (C) 2025 advanced-product-fields-for-woocommerce
+# Copyright (C) 2026 advanced-product-fields-for-woocommerce
 # This file is distributed under the same license as the advanced-product-fields-for-woocommerce package.
 msgid ""
 msgstr ""
@@ -13,7 +13,7 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: dist/class-wapf.php:78, dist/includes/controllers/class-admin-controller.php:572
+#: dist/class-wapf.php:78, dist/includes/controllers/class-admin-controller.php:535
 msgid "Product Field Groups"
 msgstr ""
 
@@ -503,124 +503,124 @@ msgstr ""
 msgid "any"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:87
+#: dist/includes/controllers/class-admin-controller.php:84
 msgid "Please add a field group title first."
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:88
+#: dist/includes/controllers/class-admin-controller.php:85
 msgid "Please add some input fields first."
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:89
+#: dist/includes/controllers/class-admin-controller.php:86
 msgid "You've reached the amount of groups you can create in the free version. Please consider upgrading to premium to add unlimited field groups. Thank you!"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:111, dist/includes/controllers/class-admin-controller.php:112
+#: dist/includes/controllers/class-admin-controller.php:108, dist/includes/controllers/class-admin-controller.php:109
 msgid "Product Input Fields"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:121
+#: dist/includes/controllers/class-admin-controller.php:118
 msgid "Settings"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:122
+#: dist/includes/controllers/class-admin-controller.php:119
 msgid "Global fields"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:162
+#: dist/includes/controllers/class-admin-controller.php:159
 msgid "Copy"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:181
+#: dist/includes/controllers/class-admin-controller.php:178
 msgid "Product input fields"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:193
+#: dist/includes/controllers/class-admin-controller.php:190
 msgid "Input Fields"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:193
+#: dist/includes/controllers/class-admin-controller.php:190
 msgid "Add some custom input fields to this group."
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:202, dist/includes/controllers/class-admin-controller.php:448
+#: dist/includes/controllers/class-admin-controller.php:199, dist/includes/controllers/class-admin-controller.php:411
 msgid "Layout"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:202
+#: dist/includes/controllers/class-admin-controller.php:199
 msgid "Field group layout settings"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:236
+#: dist/includes/controllers/class-admin-controller.php:233
 msgid "Product field settings"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:241
+#: dist/includes/controllers/class-admin-controller.php:238
 msgid "Show in cart"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:245
+#: dist/includes/controllers/class-admin-controller.php:242
 msgid "Show on customer's cart page."
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:246
+#: dist/includes/controllers/class-admin-controller.php:243
 msgid "When a user has filled out your fields, should they be summarized on their cart page after adding the product to their cart?"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:250
+#: dist/includes/controllers/class-admin-controller.php:247
 msgid "Show on checkout"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:254
+#: dist/includes/controllers/class-admin-controller.php:251
 msgid "Show on the checkout page."
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:255
+#: dist/includes/controllers/class-admin-controller.php:252
 msgid "When a user has filled out your fields, should they be summarized on their checkout page?"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:259
+#: dist/includes/controllers/class-admin-controller.php:256
 msgid "\"Add to cart\" button text"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:262
+#: dist/includes/controllers/class-admin-controller.php:259
 msgid "When a product has custom fields, what should the \"add to cart\" button say?"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:263, dist/includes/controllers/class-product-controller.php:121
+#: dist/includes/controllers/class-admin-controller.php:260, dist/includes/controllers/class-product-controller.php:121
 msgid "Select options"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:274
+#: dist/includes/controllers/class-admin-controller.php:271
 msgid "Product fields"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:430
+#: dist/includes/controllers/class-admin-controller.php:393
 msgid "Inputs"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:430
+#: dist/includes/controllers/class-admin-controller.php:393
 msgid "Add some input fields to this group."
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:439
+#: dist/includes/controllers/class-admin-controller.php:402
 msgid "Visibility conditions"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:439
+#: dist/includes/controllers/class-admin-controller.php:402
 msgid "When should these input fields be displayed?"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:448
+#: dist/includes/controllers/class-admin-controller.php:411
 msgid "Various layout settings"
 msgstr ""
 
-#: dist/includes/controllers/class-product-controller.php:150
+#: dist/includes/controllers/class-product-controller.php:145, dist/includes/controllers/class-product-controller.php:152
 msgid "Error adding product to cart."
 msgstr ""
 
 #. translators: %s points to the field's label as given in the admin settings
-#: dist/includes/controllers/class-product-controller.php:170
+#: dist/includes/controllers/class-product-controller.php:172
 msgid "The field \"%s\" is required."
 msgstr ""
 

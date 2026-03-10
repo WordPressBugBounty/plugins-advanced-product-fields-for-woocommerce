@@ -88,7 +88,9 @@ namespace SW_WAPF\Includes\Controllers {
 
                 $localize_array = [
 	                'ajaxUrl'               => admin_url( 'admin-ajax.php' ),
-	                'isWooProductScreen'    => $this->is_screen('product')
+	                'isWooProductScreen'    => $this->is_screen('product'),
+                    'nonce'                 => wp_create_nonce( 'wapf_search_products' ),
+
                 ];
 
                 wp_localize_script('wapf-admin-js', 'wapf_config', $localize_array);
@@ -276,12 +278,14 @@ namespace SW_WAPF\Includes\Controllers {
         #region Ajax Functions
         public function search_woo_products() {
 
+            check_ajax_referer( 'wapf_search_products' );
+
             if( !current_user_can(wapf_get_setting('capability')) ) {
                 echo json_encode([]);
                 wp_die();
             }
 
-            echo json_encode(Woocommerce_Service::find_products_by_name($_POST['q']));
+            echo json_encode(Woocommerce_Service::find_products_by_name( $_POST['q'] ?? '' ) );
             wp_die();
         }
 
@@ -470,7 +474,7 @@ namespace SW_WAPF\Includes\Controllers {
             $model = [
                 'condition_options' => Conditions::get_fieldgroup_visibility_conditions(),
                 'conditions'        => [],
-                'post_type'         => isset($_GET['post_type']) ? $_GET['post_type'] : 'wapf_product'
+                'post_type'         => 'wapf_product'
             ];
 
             global $post;

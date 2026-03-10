@@ -54,7 +54,7 @@ use \SW_WAPF\Includes\Classes\Html;
         <?php if($info['end_row']) { ?>
             </div><div class="wapf-field-row">
         <?php } ?>
-        <div class="<?php echo Html::field_container_classes($field); ?>" style="width:<?php echo $info['width'] ;?>%;" <?php echo Html::field_container_attributes($field);?> >
+        <div class="<?php echo esc_attr( Html::field_container_classes($field) ); ?>" style="width:<?php echo $info['width'] ;?>%;" <?php echo Html::field_container_attributes($field);?> >
 
             <?php
             if($label_position === 'above' || $label_position === 'left') {

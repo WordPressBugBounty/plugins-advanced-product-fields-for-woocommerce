@@ -15,7 +15,7 @@ namespace SW_WAPF\Includes\Classes {
         private static $all_groups_cache_key = 'field-groups-';
         private static $field_group_cache_key = 'field-group-';
         public static $allowed_html_minimal = [
-            'a'         => [ 'href'  => [], 'title' => [], 'target'=> [], 'class' => [] ],
+            'a'         => [ 'href'  => ['protocols' => ['http', 'https', 'mailto']], 'title' => [], 'target'=> [], 'class' => [] ],
             'b'         => ['class' => []],
             'em'        => ['class' => [] ],
             'strong'    => ['class' => [] ],
@@ -451,9 +451,9 @@ namespace SW_WAPF\Includes\Classes {
 
 	    public static function process_data($data) {
 
-			$unserialized = maybe_unserialize($data);
+			$unserialized = is_serialized( $data ) ? unserialize( $data, [ 'allowed_classes' => [ FieldGroup::class ] ] ) : $data;
 
-			if(is_array($unserialized)) {
+			if( is_array( $unserialized ) ) {
 				$fg = new FieldGroup();
 				return $fg->from_array($unserialized);
 			}

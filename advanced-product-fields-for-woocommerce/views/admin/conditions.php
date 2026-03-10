@@ -6,11 +6,11 @@ use SW_WAPF\Includes\Classes\Helper;
 <div rv-controller="ConditionsCtrl"
      data-raw-conditions="<?php echo Helper::thing_to_html_attribute_string($model['conditions']); ?>"
      data-fieldgroup-conditions="<?php echo Helper::thing_to_html_attribute_string($model['condition_options']); ?>"
-     data-wapf-type="<?php echo $model['post_type']; ?>"
+     data-wapf-type="<?php echo esc_attr( $model['post_type'] ); ?>"
 >
 
     <input type="hidden" name="wapf-conditions" rv-value="conditionsJson" />
-    <input type="hidden" name="wapf-fieldgroup-type" value="<?php echo $model['post_type'];?>" />
+    <input type="hidden" name="wapf-fieldgroup-type" value="<?php echo esc_attr( $model['post_type'] );?>" />
 
     <div class="wapf-conditions-list">
 

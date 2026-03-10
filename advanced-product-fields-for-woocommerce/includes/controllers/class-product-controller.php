@@ -126,7 +126,9 @@ namespace SW_WAPF\Includes\Controllers {
 
 	    public function validate_cart_data($passed, $product_id, $qty, $variation_id = null, $variations = null, $cart_item_data = null) {
 
-		    $field_groups = Field_Groups::get_field_groups_of_product( $product_id );
+            $the_product_id = empty( $variation_id ) ? intval( $product_id ) : intval( $variation_id );
+
+		    $field_groups = Field_Groups::get_field_groups_of_product( $the_product_id );
 
 		    // No field groups, so this product is not using our plugin.
 		    if( empty( $field_groups ) )
@@ -297,7 +299,13 @@ namespace SW_WAPF\Includes\Controllers {
             if(!is_array($_REQUEST['wapf']))
                 return $cart_item_data;
 
-            $field_groups   = Field_Groups::get_by_ids(explode(',', sanitize_text_field($_REQUEST['wapf_field_groups'])));
+             // In case product ID is not passed. Should not be hit, but you never know with bad plugins/themes
+            if( empty( $product_id ) && empty( $variation_id ) ) {
+                return $cart_item_data;
+            }
+
+            $the_product_id = empty( $variation_id ) ? intval( $product_id ) : intval( $variation_id );
+            $field_groups = Field_Groups::get_field_groups_of_product( $the_product_id ); 
             $fields         = Enumerable::from($field_groups)->merge(function($x){return $x->fields; })->toArray();
             $wapf_data      = [];
 	        $product        = wc_get_product(empty($variation_id) ? $product_id : $variation_id);

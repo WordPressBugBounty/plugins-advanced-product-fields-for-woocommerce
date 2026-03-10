@@ -11,7 +11,7 @@ namespace SW_WAPF\Includes\Classes
 	    private static $minimal_allowed_html = [
 		    'br'        => [],
 		    'hr'        => ['class' => [], 'style' => []],
-		    'a'         => ['href' => [], 'target' => [], 'class' => [], 'style' => []],
+		    'a'         => ['href' => ['protocols' => ['http', 'https', 'mailto']], 'target' => [], 'class' => [], 'style' => []],
 		    'i'         => ['class' => [], 'style' => []],
 		    'em'        => ['class' => [], 'style' => []],
 		    'strong'    => ['class' => [], 'style' => []],
@@ -149,7 +149,7 @@ namespace SW_WAPF\Includes\Classes
             // Prior to 1.5.7, the "paragraph" file name would be used but then if they upgrade
             // to premium, it would throw error because there "content.php" is used.
             // We can probably delete this a year after 1.5.7 is released.
-            $file_name =  $field->type === 'paragraph' ? 'content' : $field->type;
+            $file_name = sanitize_key( $field->type === 'paragraph' ? 'content' : $field->type );
 
             return self::view('frontend/fields/' . $file_name, $model);
         }
@@ -168,7 +168,7 @@ namespace SW_WAPF\Includes\Classes
             $classes = ['wapf-field-container','wapf-field-' . $field->type];
 
             if(!empty($field->class))
-                $classes[] = $field->class;
+                $classes[] = sanitize_html_class($field->class);
 
             if(!empty($field->conditionals))
                 $classes[] = 'wapf-hide';

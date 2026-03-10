@@ -8,6 +8,10 @@ namespace SW_WAPF\Includes\Classes {
 
         private $count_cache = [];
 
+        public function __construct() {
+            parent::__construct( [ 'plural' => 'fieldgroups', 'singular' => 'fieldgroup' ] );
+        }
+
         public function get_columns() {
 
             $table_columns = [
@@ -205,10 +209,14 @@ namespace SW_WAPF\Includes\Classes {
         public function process_bulk_actions() {
 
             if($this->current_action() === 'trash' && isset($_POST['fieldgroups'])) {
+                check_admin_referer( 'bulk-fieldgroups' );
                 foreach($_POST['fieldgroups'] as $post_id) {
+                    $post_id = intval( $post_id );
+                    $post    = get_post( $post_id );
+                    if( ! $post || ! in_array( $post->post_type, wapf_get_setting('cpts') ) )
+                        continue;
                     if(current_user_can('delete_post', $post_id)) {
-                        $post = get_post($post_id);
-                        if($post && $post->post_status === 'trash')
+                        if($post->post_status === 'trash')
                             wp_delete_post($post_id);
                         else wp_trash_post($post_id);
                     }

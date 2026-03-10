@@ -546,8 +546,8 @@ namespace SW_WAPF\Includes\Classes {
                         if(!$choice)
                             continue;
 
-                        if($choice['pricing_type'] === 'none')
-                            $labels[] = $choice['label'];
+                        if( $choice['pricing_type'] === 'none' )
+                            $labels[] = esc_html($choice['label']);
                         else $labels[] = sprintf('%s (%s)', esc_html($choice['label']), Helper::format_pricing_hint($choice['pricing_type'],$choice['pricing_amount'],$product,$for_page));
 
                     }

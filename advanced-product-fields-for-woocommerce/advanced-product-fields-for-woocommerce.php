@@ -3,7 +3,7 @@
  * Plugin Name: Advanced Product Fields (Product Addons) for WooCommerce
  * Plugin URI: https://www.studiowombat.com/plugin/advanced-product-fields-for-woocommerce/?utm_source=apffree&utm_medium=plugin&utm_campaign=plugins
  * Description: Customize WooCommerce product pages with powerful and intuitive fields ( = product add-ons).
- * Version: 1.6.20
+ * Version: 1.6.21
  * Author: StudioWombat
  * Author URI: https://www.studiowombat.com/?utm_source=apffree&utm_medium=plugin&utm_campaign=plugins
  * Text Domain: advanced-product-fields-for-woocommerce
@@ -40,7 +40,7 @@ spl_autoload_register('SW_WAPF_auto_loader');
 function wapf() {
 
     // version
-    $version = '1.6.20';
+    $version = '1.6.21';
 
     // globals
     global $wapf;

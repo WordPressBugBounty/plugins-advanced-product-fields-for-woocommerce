@@ -304,8 +304,8 @@ namespace SW_WAPF\Includes\Controllers {
                 return $cart_item_data;
             }
 
-            $the_product_id = empty( $variation_id ) ? intval( $product_id ) : intval( $variation_id );
-            $field_groups = Field_Groups::get_field_groups_of_product( $the_product_id ); 
+            $field_groups = Field_Groups::get_field_groups_of_product( $product_id ); 
+
             $fields         = Enumerable::from($field_groups)->merge(function($x){return $x->fields; })->toArray();
             $wapf_data      = [];
 	        $product        = wc_get_product(empty($variation_id) ? $product_id : $variation_id);

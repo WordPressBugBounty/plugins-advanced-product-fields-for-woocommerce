@@ -615,12 +615,12 @@ msgstr ""
 msgid "Various layout settings"
 msgstr ""
 
-#: dist/includes/controllers/class-product-controller.php:147, dist/includes/controllers/class-product-controller.php:154
+#: dist/includes/controllers/class-product-controller.php:146, dist/includes/controllers/class-product-controller.php:153
 msgid "Error adding product to cart."
 msgstr ""
 
 #. translators: %s points to the field's label as given in the admin settings
-#: dist/includes/controllers/class-product-controller.php:174
+#: dist/includes/controllers/class-product-controller.php:173
 msgid "The field \"%s\" is required."
 msgstr ""
 

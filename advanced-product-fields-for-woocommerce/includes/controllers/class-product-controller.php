@@ -126,9 +126,8 @@ namespace SW_WAPF\Includes\Controllers {
 
 	    public function validate_cart_data($passed, $product_id, $qty, $variation_id = null, $variations = null, $cart_item_data = null) {
 
-            $the_product_id = empty( $variation_id ) ? intval( $product_id ) : intval( $variation_id );
 
-		    $field_groups = Field_Groups::get_field_groups_of_product( $the_product_id );
+		    $field_groups = Field_Groups::get_field_groups_of_product( $product_id );
 
 		    // No field groups, so this product is not using our plugin.
 		    if( empty( $field_groups ) )

@@ -3,10 +3,10 @@ Contributors: studiowombat,maartenbelmans
 Tags: woocommerce product addons, woocommerce, woocommerce product options, product addons, product fields
 Requires at least: 4.5
 Tested up to: 7.0
-Requires PHP: 5.6
+Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.6.22
+Stable tag: 1.7
 
 Add options (addons) to your WooCommerce products so your customers can personalize their products. Product forms for everyone!
 
@@ -142,7 +142,7 @@ Everything from the free version, plus:
 * Add-on plugins to make it even more powerful. You can create product configurators with live preview, powerup file uploads, add an image editor, integrate with ACF, ...
 * And more..!
 
-[Premium Demos](https://product-demo.studiowombat.com/?utm_source=wporg&utm_medium=referral&utm_campaign=readme) | [Premium WP admin demo](http://wapf-admin.studiowombat.com/pro/wp-admin/?utm_source=wporg&utm_medium=referral&utm_campaign=readme) | [More info](https://studiowombat.com/plugin/advanced-product-fields-for-woocommerce/?utm_source=wporg&utm_medium=referral&utm_campaign=readme)
+[Premium Demos](https://product-demo.studiowombat.com/?utm_source=wporg&utm_medium=referral&utm_campaign=readme) | [Premium WP admin demo](http://wapf-admin.studiowombat.com/wp-admin/?utm_source=wporg&utm_medium=referral&utm_campaign=readme) | [More info](https://studiowombat.com/plugin/advanced-product-fields-for-woocommerce/?utm_source=wporg&utm_medium=referral&utm_campaign=readme)
 
 
 == Installation ==
@@ -160,11 +160,39 @@ From your WordPress dashboard
 
 == Frequently Asked Questions ==
 
-= What are the system or server requirements? =
+= How do I add input fields to my products? =
 
- You'll need WooCommerce 3.6.0 or higher, WordPress 4.7 or higher, and PHP 7.0 or higher to make this plugin work.
+Once the plugin is installed, go to WooCommerce > Product Input Fields to start adding options to your products! Alternatively, you can also add input fields via each "Edit Product" page in WooCommerce.
 
+= Does APF slow down my website? =
+
+No, APF is designed with performance in mind. We prioritize speed and efficiency, ensuring it remains lightweight without compromising on features (something other plugins overlook). 
+
+We regularly check our plugin against competitors and our code remains small, lightweight, and among the fastest!
+
+= Do I need coding knowledge to use APF? =
+
+No, APF is a no-code solution that's intuitive and easy to use, so you don't need any coding experience.
+
+= Can I create as many options as I want? =
+
+Yes, you can create unlimited product options with APF, giving you full flexibility to customize your products however you need.
+
+= What are the system or server requirements to use APF? =
+
+ You'll need WooCommerce 6.0 or higher, WordPress 6.0 or higher, and PHP 7.0 or higher to make this plugin work.
+
+== Screenshots ==
+
+1. Dynamic Product Pricing
+2. Advanced Conditional Logic
+3. Intuitive, lightweight Product Options Builder
+	
 == Changelog ==
+= 1.7 =
+ * Improvement: Enhanced the admin UI for a more intuitive user experience and updated the overall look and feel.
+ * Improvement: improved guidance throughout some settings.
+ * Other: we'll increase the minimum WP version (possibly to 6.0) soon.
 
 = 1.6.22 =
  * Improvement: improved integration with Gift Card plugins.
@@ -234,7 +262,6 @@ From your WordPress dashboard
  * Improvement: minor code improvements.
  * Other: soft-increase minimum PHP verion to 7.0 in accordance with the new WordPress minimal requirements. This is not a breaking change for now.
  * Other: readme changes to reflect limitations.
-
 
 = 1.6.4 =
  * Improvement: started redesigning the admin fields, beginning with new field icons.

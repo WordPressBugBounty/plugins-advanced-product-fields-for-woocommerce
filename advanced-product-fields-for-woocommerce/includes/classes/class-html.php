@@ -25,6 +25,41 @@ namespace SW_WAPF\Includes\Classes
 		    'h5'      => ['class' => [], 'style' => []],
 		    'h6'      => ['class' => [], 'style' => []],
 	    ];
+        
+        public static $allow_only_svg = [
+            'svg' => [
+                'xmlns' => true,
+                'viewbox' => true,
+                'width' => true,
+                'height' => true,
+                'fill' => true,
+                'stroke' => true,
+            ],
+            'g' => [
+                'fill' => true,
+                'stroke' => true,
+            ],
+            'path' => [
+                'd' => true,
+                'fill' => true,
+                'stroke' => true,
+                'stroke-width' => true,
+                'fill-rule' => true,
+            ],
+            'circle' => [
+                'cx' => true,
+                'cy' => true,
+                'r' => true,
+                'fill' => true,
+            ],
+            'rect' => [
+                'x' => true,
+                'y' => true,
+                'width' => true,
+                'height' => true,
+                'fill' => true,
+            ],
+        ];
 
 	    #region General views
         /**

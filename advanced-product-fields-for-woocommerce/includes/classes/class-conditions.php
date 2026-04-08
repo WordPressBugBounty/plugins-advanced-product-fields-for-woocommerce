@@ -19,6 +19,7 @@ namespace SW_WAPF\Includes\Classes {
 				        ['value' => '==', 'label' => __('Value is equal to','advanced-product-fields-for-woocommerce'), 'type' => 'text'],
 				        ['value' => '!=', 'label' => __('Value is not equal to','advanced-product-fields-for-woocommerce'), 'type' => 'text'],
 				        ['value' => '==contains', 'label' => __('Value contains (Pro only)','advanced-product-fields-for-woocommerce'), 'type' => 'text', 'pro' => true],
+                        ['value' => '!=contains', 'label' => __('Value doesn\'t contains (Pro only)','advanced-product-fields-for-woocommerce'), 'type' => 'text', 'pro' => true],
 			        ]
 		        ],
 		        [
@@ -29,7 +30,9 @@ namespace SW_WAPF\Includes\Classes {
 				        ['value' => '==', 'label' => __('Value is equal to','advanced-product-fields-for-woocommerce'), 'type' => 'text'],
 				        ['value' => '!=', 'label' => __('Value is not equal to','advanced-product-fields-for-woocommerce'), 'type' => 'text'],
 				        ['value' => '==contains', 'label' => __('Value contains (Pro only)','advanced-product-fields-for-woocommerce'), 'type' => 'text', 'pro' => true],
-			        ]
+                        ['value' => '!=contains', 'label' => __('Value doesn\'t contains (Pro only)','advanced-product-fields-for-woocommerce'), 'type' => 'text', 'pro' => true],
+
+                    ]
 		        ],
 		        [
 			        'type'          => 'url',
@@ -39,7 +42,9 @@ namespace SW_WAPF\Includes\Classes {
 				        ['value' => '==', 'label' => __('Value is equal to','advanced-product-fields-for-woocommerce'), 'type' => 'text'],
 				        ['value' => '!=', 'label' => __('Value is not equal to','advanced-product-fields-for-woocommerce'), 'type' => 'text'],
 				        ['value' => '==contains', 'label' => __('Value contains (Pro only)','advanced-product-fields-for-woocommerce'), 'type' => 'text', 'pro' => true],
-			        ]
+                        ['value' => '!=contains', 'label' => __('Value doesn\'t contains (Pro only)','advanced-product-fields-for-woocommerce'), 'type' => 'text', 'pro' => true],
+
+                    ]
 		        ],
 		        [
 			        'type'          => 'number',
@@ -51,7 +56,9 @@ namespace SW_WAPF\Includes\Classes {
 				        ['value' => 'gt', 'label' => __('Value is greater than','advanced-product-fields-for-woocommerce'), 'type' => 'number'],
 				        ['value' => 'lt', 'label' => __('Value is lesser than','advanced-product-fields-for-woocommerce'), 'type' => 'number'],
 				        ['value' => '==contains', 'label' => __('Value contains (Pro only)','advanced-product-fields-for-woocommerce'), 'type' => 'text', 'pro' => true],
-			        ]
+                        ['value' => '!=contains', 'label' => __('Value doesn\'t contains (Pro only)','advanced-product-fields-for-woocommerce'), 'type' => 'text', 'pro' => true],
+
+                    ]
 		        ],
 		        [
 			        'type'          => 'textarea',
@@ -61,7 +68,9 @@ namespace SW_WAPF\Includes\Classes {
 				        ['value' => '==', 'label' => __('Value is equal to','advanced-product-fields-for-woocommerce'), 'type' => 'text'],
 				        ['value' => '!=', 'label' => __('Value is not equal to','advanced-product-fields-for-woocommerce'), 'type' => 'text'],
 				        ['value' => '==contains', 'label' => __('Value contains (Pro only)','advanced-product-fields-for-woocommerce'), 'type' => 'text', 'pro' => true],
-			        ]
+                        ['value' => '!=contains', 'label' => __('Value doesn\'t contains (Pro only)','advanced-product-fields-for-woocommerce'), 'type' => 'text', 'pro' => true],
+
+                    ]
 		        ], [
 			        'type'          => 'true-false',
 			        'conditions'    => [

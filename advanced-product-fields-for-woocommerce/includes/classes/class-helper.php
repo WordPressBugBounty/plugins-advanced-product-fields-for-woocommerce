@@ -5,6 +5,20 @@ namespace SW_WAPF\Includes\Classes {
     class Helper
     {
 
+        public static function lighten_darken_hex( string $hex, float $percent ): string {
+
+            $hex = ltrim( $hex, '#' );
+            $hex = array_map( 'hexdec', str_split( $hex, 2 ) );
+
+            foreach ( $hex as & $color ) {
+                $adjustableLimit = $percent < 0 ? $color : 255 - $color;
+                $adjustAmount = ceil( $adjustableLimit * $percent );
+                $color = str_pad( dechex( $color + $adjustAmount ), 2, '0', STR_PAD_LEFT );
+            }
+
+            return '#' . implode( $hex );
+        }
+
 	    // WP has a bug in their "wp_slash" function that is only fixed in wp 5.5 so we define our own here.
 	    public static function wp_slash($value) {
 		    if ( is_array( $value ) ) {

@@ -93,10 +93,18 @@ namespace SW_WAPF\Includes\Controllers {
 
                 ];
 
-                wp_localize_script('wapf-admin-js', 'wapf_config', $localize_array);
+                wp_localize_script( 'wapf-admin-js', 'wapf_config', $localize_array );
 
                 // Don't do autosave
-                wp_dequeue_script('autosave');
+                wp_dequeue_script( 'autosave' );
+
+                // Add CSS variable for admin color.
+                add_action( 'admin_head', function() {
+                    global $_wp_admin_css_colors;
+                    $active_color_scheme = get_user_option( 'admin_color' );
+                    echo '<style>:root{ --apf-primary-color: ' . $_wp_admin_css_colors[ $active_color_scheme]->colors[2] . ';--apf-secondary-color: ' . Helper::lighten_darken_hex( $_wp_admin_css_colors[ $active_color_scheme]->colors[2], 0.2 ) . ';--apf-tertiary-color: ' . Helper::lighten_darken_hex( $_wp_admin_css_colors[ $active_color_scheme]->colors[2], 0.9 ) . ' }</style>';
+                });
+                
             }
 
         }
@@ -189,8 +197,10 @@ namespace SW_WAPF\Includes\Controllers {
 
             echo '<div id="customfields_options" class="panel woocommerce_options_panel">';
 
-            echo '<h4 class="wapf-product-admin-title">' .  esc_html__('Input Fields','advanced-product-fields-for-woocommerce') .' &mdash; <span style="opacity:.5;">'. esc_html__('Add some custom input fields to this group.','advanced-product-fields-for-woocommerce').'</span>' . '</h4>';
-
+            echo '<div class="wapf-admin">';
+            
+            echo '<h4 class="wapf-product-admin-title">' .  esc_html__('Input Fields','advanced-product-fields-for-woocommerce') .' &mdash; <span style="opacity:.5;">'. esc_html__('Add input fields to this product', 'advanced-product-fields-for-woocommerce').'</span>' . '</h4>';
+            
             $this->display_field_group_fields(true);
 
             // Hide field group settings and make them default to only the product.
@@ -200,7 +210,8 @@ namespace SW_WAPF\Includes\Controllers {
 
             echo '<h4 class="wapf-product-admin-title">' .  esc_html__('Layout','advanced-product-fields-for-woocommerce') .' &mdash; <span style="opacity:.5;">'. esc_html__('Field group layout settings','advanced-product-fields-for-woocommerce').'</span>' . '</h4>';
             $this->display_field_group_layout(true);
-
+            
+            echo '</div>';
             echo '</div>';
         }
 
@@ -390,11 +401,18 @@ namespace SW_WAPF\Includes\Controllers {
 
             // If on "add field group" screens, add metaboxes
             $cpts = wapf_get_setting('cpts');
-            if($this->is_screen($cpts)) {
-
+            
+            if( $this->is_screen($cpts) ) {
+                
+                // Add a class to the body.
+                add_filter('admin_body_class', function($classes) {
+                    $classes .= ' wapf-admin';
+                    return $classes;
+                });
+                    
                 add_meta_box(
                     'wapf-field-list',
-                    __('Inputs','advanced-product-fields-for-woocommerce') .' &mdash; <span style="opacity:.5;">'.__('Add some input fields to this group.','advanced-product-fields-for-woocommerce').'</span>',
+                    __('Inputs','advanced-product-fields-for-woocommerce') .' &mdash; <span style="opacity:.5;">'.__('Add input fields to this group','advanced-product-fields-for-woocommerce').'</span>',
                     [$this, 'display_field_group_fields'],
                     $cpts,
                     'normal',
@@ -438,11 +456,11 @@ namespace SW_WAPF\Includes\Controllers {
             echo Html::view("admin/conditions", $model);
         }
 
-        public function display_field_group_fields($for_product_admin = false) {
+        public function display_field_group_fields( $for_product_admin = false ) {
 
-            $model = $this->create_field_group_model($for_product_admin);
+            $model = $this->create_field_group_model( $for_product_admin );
             // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-            echo Html::view("admin/field-list", $model);
+            echo Html::view('admin/field-list', $model );
 
         }
 
@@ -504,13 +522,14 @@ namespace SW_WAPF\Includes\Controllers {
 
         }
 
-        private function create_field_group_model($for_product_admin = false) {
+        private function create_field_group_model( $for_product_admin = false ) {
 
             // Defaults.
             $model = [
                 'fields'            => [],
                 'condition_options' => Conditions::get_field_visibility_conditions(),
-                'type'              => 'wapf_product'
+                'type'              => 'wapf_product',
+                'for_product_admin' => $for_product_admin
             ];
 
             global $post;

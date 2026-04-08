@@ -15,9 +15,9 @@ $pro = isset($model['pro']) && $model['pro'] === true;
     <div class="wapf-setting__input">
         <div class="wapf-toggle" rv-unique-checkbox>
             <input <?php echo $pro ? 'disabled':'';?> rv-on-change="onChange" rv-checked="<?php echo $model['is_field_setting'] ? 'field' : 'settings'; ?>.<?php echo $model['id']; ?>" type="checkbox" >
-            <label class="wapf-toggle__label" for="wapf-toggle-">
-                <span class="wapf-toggle__inner" data-true="<?php esc_attr_e('Yes','advanced-product-fields-for-woocommerce'); ?>" data-false="<?php esc_attr_e('No','advanced-product-fields-for-woocommerce'); ?>"></span>
-                <span class="wapf-toggle__switch"></span>
+            <label class="wapf-toggle-label" for="wapf-toggle-">
+                <span class="wapf-toggle-inner" data-true="<?php esc_attr_e( 'Yes', 'advanced-product-fields-for-woocommerce' ) ?>" data-false="<?php esc_attr_e( 'No', 'advanced-product-fields-for-woocommerce' ) ?>"></span>
+                <span class="wapf-toggle-switch"></span>
             </label>
         </div>
 

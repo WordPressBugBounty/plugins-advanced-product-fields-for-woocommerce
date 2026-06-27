@@ -10,16 +10,11 @@ namespace SW_WAPF {
         die;
     }
 
-    class WAPF
-    {
-
+    class WAPF {
 
         private $settings = [];
 
-        public function __construct()
-        {
-
-        }
+        public function __construct() {}
 
         public function initialize($version,$base_file) {
 
@@ -54,8 +49,9 @@ namespace SW_WAPF {
             add_action('init',	[$this, 'register_post_types']);
 
             // Kick off admin page.
-            if(is_admin())
+            if( is_admin() ) {
                 new Admin_Controller();
+            }
 
             new Public_Controller();
 

@@ -6,7 +6,7 @@ Tested up to: 7.0
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.7
+Stable tag: 1.7.1
 
 Add options (addons) to your WooCommerce products so your customers can personalize their products. Product forms for everyone!
 
@@ -189,6 +189,10 @@ Yes, you can create unlimited product options with APF, giving you full flexibil
 3. Intuitive, lightweight Product Options Builder
 	
 == Changelog ==
+
+= 1.7.1 =
+ * Fix: fixed minor admin styling inconsistencies due to WordPress 7.0 style changes.
+
 = 1.7 =
  * Improvement: Enhanced the admin UI for a more intuitive user experience and updated the overall look and feel.
  * Improvement: improved guidance throughout some settings.

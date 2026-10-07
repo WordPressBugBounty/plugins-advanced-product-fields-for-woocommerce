@@ -13,6 +13,9 @@ $_pro_types  = array_values(array_filter($_field_types, function($t) { return  $
 // Closure to render the popover (used in two places below).
 $_render_popover = function() use ($_free_types, $_pro_types, $field_icons ) { ?>
     <div class="wapf-field-popover">
+        <div class="wapf-field-popover-search">
+            <input type="text" class="wapf-field-search-input" placeholder="<?php esc_attr_e( 'Search fields', 'advanced-product-fields-for-woocommerce' ) ?>…" autocomplete="off" />
+        </div>
         <div class="wapf-field-popover-items">
             <?php foreach ($_free_types as $_type) {
                 $icon = $field_icons[$_type['id']] ?? ''; ?>

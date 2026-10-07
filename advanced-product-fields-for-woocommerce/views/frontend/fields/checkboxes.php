@@ -2,6 +2,7 @@
 /** @var array $model */
 use SW_WAPF\Includes\Classes\Helper;
 use SW_WAPF\Includes\Classes\Enumerable;
+use SW_WAPF\Includes\Classes\Html;
 
 if(!empty($model['field']->conditionals))
     $dependencies = Helper::thing_to_html_attribute_string($model['field']->conditionals);
@@ -47,7 +48,7 @@ if(!empty($model['field']->options['choices'])) {
                     return $key . '="' . esc_attr($value) .'"';
                 else return $key;
             },' '),
-            esc_html($option['label']) . (isset($option['pricing_type']) && $option['pricing_type'] === 'none' ? '' : ' <span class="wapf-pricing-hint">('. Helper::format_pricing_hint($option['pricing_type'], $option['pricing_amount'],$model['product'],'shop') .')</span>')
+            esc_html($option['label']) . Html::frontend_option_pricing_hint( $option, $model['product'] )
         );
 
     }

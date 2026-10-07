@@ -105,7 +105,7 @@ namespace SW_WAPF\Includes\Classes {
                         if(isset($raw_choice['pricing_type']))
                             $choice['pricing_type'] = sanitize_text_field($raw_choice['pricing_type']);
                         if(isset($raw_choice['pricing_amount']))
-                            $choice['pricing_amount'] = floatval($raw_choice['pricing_amount']);
+                            $choice['pricing_amount'] = floatval(Helper::normalize_string_decimal($raw_choice['pricing_amount']));
 
                         $field->options['choices'][] = $choice;
                     }

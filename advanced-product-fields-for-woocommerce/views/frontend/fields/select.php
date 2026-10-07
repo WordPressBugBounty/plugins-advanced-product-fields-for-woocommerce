@@ -2,6 +2,7 @@
 /** @var array $model */
 use SW_WAPF\Includes\Classes\Helper;
 use SW_WAPF\Includes\Classes\Enumerable;
+use SW_WAPF\Includes\Classes\Html;
 
 ?>
 
@@ -33,7 +34,7 @@ use SW_WAPF\Includes\Classes\Enumerable;
                             return $key . '="' . esc_attr($value) .'"';
                         else return $key;
                     },' '),
-                    esc_html($option['label']) . ( $has_pricing ? ' <span class="wapf-pricing-hint">('. Helper::format_pricing_hint($option['pricing_type'], $option['pricing_amount'],$model['product'],'shop') .')</span>' : '')
+                    esc_html($option['label']) . Html::frontend_option_pricing_hint( $option, $model['product'] )
                 );
             }
         }

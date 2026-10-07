@@ -539,7 +539,7 @@ namespace SW_WAPF\Includes\Classes {
 
         public static function value_to_string(Field $field, $raw_value, $include_price_label = true, $product = null, $for_page = 'shop') {
 
-            if($include_price_label) {
+            if( $include_price_label && Helper::show_pricing_hints() ) {
 
                 // Pricing field has options. We'll append the pricing indication to the labels.
                 if(!empty($field->options['choices'])) {

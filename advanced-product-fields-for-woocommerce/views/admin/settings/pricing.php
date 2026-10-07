@@ -35,7 +35,7 @@
                     </select>
                 </div>
                 <div>
-                    <input rv-on-change="onChange" type="number" min="0" step="any" rv-value="<?php echo $model['is_field_setting'] ? 'field' : 'settings'; ?>.pricing.amount" />
+                    <input rv-on-change="onChange" type="text" inputmode="decimal" class="wc_input_price" event-name="change" rv-value="<?php echo $model['is_field_setting'] ? 'field' : 'settings'; ?>.pricing.amount | price" />
                 </div>
             </div>
             <div>

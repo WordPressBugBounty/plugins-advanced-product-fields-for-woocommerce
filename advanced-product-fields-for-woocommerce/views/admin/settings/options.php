@@ -42,7 +42,7 @@
                             </select>
                         </div>
                         <div class="wapf-option-cell wapf-option__flex">
-                            <input rv-on-change="onChange" type="number" min="0" step="any" rv-value="choice.pricing_amount" />
+                            <input rv-on-change="onChange" type="text" inputmode="decimal" class="wc_input_price" event-name="change" rv-value="choice.pricing_amount | price" />
                         </div>
                         
                     <?php } ?>

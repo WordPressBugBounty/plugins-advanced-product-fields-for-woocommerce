@@ -75,6 +75,17 @@ namespace SW_WAPF\Includes\Classes {
 
         }
 
+        public static function show_pricing_hints(): bool {
+
+            static $show = null;
+
+            if( $show === null ) {
+                $show = get_option( 'wapf_show_pricing_hints', 'yes' ) === 'yes';
+            }
+
+            return $show;
+        }
+
         public static function format_pricing_hint($type, $amount, $product, $for_page = 'shop') {
 
             $display_settings = WooCommerce_Service::get_price_display_options();

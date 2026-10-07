@@ -13,7 +13,7 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: dist/class-wapf.php:74, dist/includes/controllers/class-admin-controller.php:558
+#: dist/class-wapf.php:74, dist/includes/controllers/class-admin-controller.php:571
 msgid "Product Field Groups"
 msgstr ""
 
@@ -511,103 +511,115 @@ msgstr ""
 msgid "You've reached the amount of groups you can create in the free version. Please consider upgrading to premium to add unlimited field groups. Thank you!"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:118, dist/includes/controllers/class-admin-controller.php:119
+#: dist/includes/controllers/class-admin-controller.php:122, dist/includes/controllers/class-admin-controller.php:123
 msgid "Product Input Fields"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:128
+#: dist/includes/controllers/class-admin-controller.php:132
 msgid "Settings"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:129
+#: dist/includes/controllers/class-admin-controller.php:133
 msgid "Global fields"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:169
+#: dist/includes/controllers/class-admin-controller.php:173
 msgid "Copy"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:188
+#: dist/includes/controllers/class-admin-controller.php:192
 msgid "Product input fields"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:202
+#: dist/includes/controllers/class-admin-controller.php:206
 msgid "Input Fields"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:202
+#: dist/includes/controllers/class-admin-controller.php:206
 msgid "Add input fields to this product"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:211, dist/includes/controllers/class-admin-controller.php:433
+#: dist/includes/controllers/class-admin-controller.php:215, dist/includes/controllers/class-admin-controller.php:446
 msgid "Layout"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:211
+#: dist/includes/controllers/class-admin-controller.php:215
 msgid "Field group layout settings"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:246
+#: dist/includes/controllers/class-admin-controller.php:250
 msgid "Product field settings"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:251
+#: dist/includes/controllers/class-admin-controller.php:255
 msgid "Show in cart"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:255
+#: dist/includes/controllers/class-admin-controller.php:259
 msgid "Show on customer's cart page."
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:256
+#: dist/includes/controllers/class-admin-controller.php:260
 msgid "When a user has filled out your fields, should they be summarized on their cart page after adding the product to their cart?"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:260
+#: dist/includes/controllers/class-admin-controller.php:264
 msgid "Show on checkout"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:264
+#: dist/includes/controllers/class-admin-controller.php:268
 msgid "Show on the checkout page."
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:265
+#: dist/includes/controllers/class-admin-controller.php:269
 msgid "When a user has filled out your fields, should they be summarized on their checkout page?"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:269
+#: dist/includes/controllers/class-admin-controller.php:273
 msgid "\"Add to cart\" button text"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:272
+#: dist/includes/controllers/class-admin-controller.php:276
 msgid "When a product has custom fields, what should the \"add to cart\" button say?"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:273, dist/includes/controllers/class-product-controller.php:121
+#: dist/includes/controllers/class-admin-controller.php:277, dist/includes/controllers/class-product-controller.php:121
 msgid "Select options"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:284
+#: dist/includes/controllers/class-admin-controller.php:281
+msgid "Show price hints"
+msgstr ""
+
+#: dist/includes/controllers/class-admin-controller.php:285
+msgid "Show price hints."
+msgstr ""
+
+#: dist/includes/controllers/class-admin-controller.php:286
+msgid "When an option changes the final product price, a pricing hint is shown next to the option. You can disable that here."
+msgstr ""
+
+#: dist/includes/controllers/class-admin-controller.php:297
 msgid "Product fields"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:415
+#: dist/includes/controllers/class-admin-controller.php:428
 msgid "Inputs"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:415
+#: dist/includes/controllers/class-admin-controller.php:428
 msgid "Add input fields to this group"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:424
+#: dist/includes/controllers/class-admin-controller.php:437
 msgid "Visibility conditions"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:424
+#: dist/includes/controllers/class-admin-controller.php:437
 msgid "When should these input fields be displayed?"
 msgstr ""
 
-#: dist/includes/controllers/class-admin-controller.php:433
+#: dist/includes/controllers/class-admin-controller.php:446
 msgid "Various layout settings"
 msgstr ""
 
@@ -656,19 +668,23 @@ msgstr ""
 msgid "A field group is a collection of fields that belong together."
 msgstr ""
 
-#: dist/views/admin/field-list.php:53
+#: dist/views/admin/field-list.php:17
+msgid "Search fields"
+msgstr ""
+
+#: dist/views/admin/field-list.php:56
 msgid "Get started by creating new input fields to this product."
 msgstr ""
 
-#: dist/views/admin/field-list.php:54
+#: dist/views/admin/field-list.php:57
 msgid "Get started by creating new input fields for your WooCommerce products."
 msgstr ""
 
-#: dist/views/admin/field-list.php:61
+#: dist/views/admin/field-list.php:64
 msgid "add an input field"
 msgstr ""
 
-#: dist/views/admin/field-list.php:78
+#: dist/views/admin/field-list.php:81
 msgid "input field"
 msgstr ""
 
@@ -872,6 +888,6 @@ msgstr ""
 msgid "(Pro only)"
 msgstr ""
 
-#: dist/views/frontend/fields/select.php:15
+#: dist/views/frontend/fields/select.php:16
 msgid "Choose an option"
 msgstr ""

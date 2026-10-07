@@ -229,11 +229,19 @@ namespace SW_WAPF\Includes\Classes
             if( $show_required_symbol && $field->required )
                 $label .= ' <abbr class="required" title="' . esc_attr__( 'required', 'advanced-product-fields-for-woocommerce' ) . '">*</abbr>';
 
-            if( $field->pricing_enabled() && $field->type !== 'true-false' && ! $field->is_choice_field() ) {
+            if( $field->pricing_enabled() && $field->type !== 'true-false' && ! $field->is_choice_field() && Helper::show_pricing_hints() ) {
                 $label .= ' <span class="wapf-pricing-hint">(' . Helper::format_pricing_hint( $field->pricing->type, $field->pricing->amount, $product, 'shop' ) . ')</span>';
             }
 
             return $label;
+        }
+
+        public static function frontend_option_pricing_hint( $option, $product ): string {
+
+            if( ! Helper::show_pricing_hints() || empty( $option['pricing_type'] ) || $option['pricing_type'] === 'none' )
+                return '';
+
+            return ' <span class="wapf-pricing-hint">(' . Helper::format_pricing_hint( $option['pricing_type'], $option['pricing_amount'], $product, 'shop' ) . ')</span>';
         }
 
         private static function field_attributes($product,Field $field, $field_group_id) {

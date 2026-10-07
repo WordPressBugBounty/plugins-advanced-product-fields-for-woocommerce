@@ -90,10 +90,14 @@ namespace SW_WAPF\Includes\Controllers {
 	                'ajaxUrl'               => admin_url( 'admin-ajax.php' ),
 	                'isWooProductScreen'    => $this->is_screen('product'),
                     'nonce'                 => wp_create_nonce( 'wapf_search_products' ),
-
+                    'priceDecimalSep'       => wc_get_price_decimal_separator(),
+                    'priceThousandSep'      => wc_get_price_thousand_separator(),
                 ];
 
                 wp_localize_script( 'wapf-admin-js', 'wapf_config', $localize_array );
+
+                // Woo's admin script validates .wc_input_price inputs (decimal separator errors) via delegated handlers, so it catches our dynamically rendered price inputs too.
+                wp_enqueue_script( 'woocommerce_admin' );
 
                 // Don't do autosave
                 wp_dequeue_script( 'autosave' );
@@ -271,6 +275,15 @@ namespace SW_WAPF\Includes\Controllers {
                 'id'        => 'wapf_add_to_cart_text',
                 'desc_tip'  => __( 'When a product has custom fields, what should the "add to cart" button say?', 'advanced-product-fields-for-woocommerce' ),
                 'default'   => __('Select options','advanced-product-fields-for-woocommerce')
+            ];
+
+            $settings[] = [
+                'name'      => __( 'Show price hints', 'advanced-product-fields-for-woocommerce' ),
+                'id'        => 'wapf_show_pricing_hints',
+                'type'      => 'checkbox',
+                'default'   => 'yes',
+                'desc'      => __( 'Show price hints.', 'advanced-product-fields-for-woocommerce' ),
+                'desc_tip'  => __( 'When an option changes the final product price, a pricing hint is shown next to the option. You can disable that here.', 'advanced-product-fields-for-woocommerce' )
             ];
 
             $settings[] = [

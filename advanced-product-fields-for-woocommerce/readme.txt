@@ -12,15 +12,23 @@ Add options (addons) to your WooCommerce products so your customers can personal
 
 == description ==
 
-Advaced Product Fields (Product Addons) for WooCommerce allows you to add extra product options (form input fields) to your WooCommerce product pages. Whether you want to create a pizza configurator or add extra options, this plugin has got you covered!
+**Create customizable WooCommerce products without coding.**
+Add text fields, dropdowns, checkboxes, radio buttons, and other options to your products. Let customers personalize their purchases, charge extra for selected options, and show or hide fields based on their choices.
 
-Allow customers to personalize their product with a handful of extra choices, input fields, etc... These product addons can increase the final product price too. The extra form data submitted by the customer will be shown on the cart and checkout pages and will be saved on the backend order.
+✅ Solves many use-cases while remaining lightweight & fast (it's our priority)!
+❤️ Trusted by **50,000+ store owners** and rated **4.8/5**
 
-The backend looks & works similar to ACF, so you are familiar with setting up the extra product options without a hassle.
+💻 [View Demos](https://product-demo.studiowombat.com/?utm_source=wporg&utm_medium=referral&utm_campaign=readme) | 🔥 [Pro Version](https://studiowombat.com/plugin/advanced-product-fields-for-woocommerce/?utm_source=wporg&utm_medium=referral&utm_campaign=readme) | 📃 [Documentation](https://www.studiowombat.com/article-categories/advanced-product-fields-for-woocommerce/?utm_source=wporg&utm_medium=referral&utm_campaign=readme)
 
-This plugin is the best modern free WooCommerce Product Addons alternative currently available.
+Whether you're selling personalized gifts, custom T-shirts, or build-your-own pizzas, Advanced Product Fields helps you offer more choices to your customers.
 
-[&raquo; Demos](https://product-demo.studiowombat.com/?utm_source=wporg&utm_medium=referral&utm_campaign=readme) | [&raquo; More info](https://studiowombat.com/plugin/advanced-product-fields-for-woocommerce/?utm_source=wporg&utm_medium=referral&utm_campaign=readme)
+Selected options and any additional costs are automatically reflected in the cart and checkout, with the customer's choices saved to the order.
+
+Setting everything up is easy thanks to our intuitive field builder, inspired by Advanced Custom Fields (ACF).
+
+== 👉️ Introduction to Advanced Product Fields for WooCommerce! ==
+
+[youtube https://www.youtube.com/watch?v=lteJa2roJmQ]
 
 == 👉️ Features ==
 
@@ -34,7 +42,7 @@ This plugin is the best modern free WooCommerce Product Addons alternative curre
   * **Select (drop-down)** - A dropdown field to select one option from a list of options
   * **Checkboxes** - To choose one or more options
   * **Radio buttons** - To select one option from multiple options
-  * **True/false** - A single "yes or no" checkbox, which you usually know from "accept the terms of conditions" fields
+  * **True/false** - A single "yes or no" checkbox, which you usually know from "accept the terms and conditions" fields
   * **Paragraph** - If you want to add static blocks of text in between input fields, this does the trick!
 * Conditional logic (show/hide fields based on other input fields)
 * Increase final product price: add a flat fee to your products depending on the field value(s)
@@ -42,7 +50,7 @@ This plugin is the best modern free WooCommerce Product Addons alternative curre
 * Optimized for speed and faster than other plugins in this genre
 * Visibility options: decide on which product(s) to show your fields
 * Works with both simple & variable products and also supports variable products over ajax
-* Frontend already translated in English, French, German, Spannish, and Dutch
+* Frontend already translated in English, French, German, Spanish, and Dutch
 * Translation-ready for other languages
 
 <strong>👉 How can our plugin be useful and what should you use it for?</strong>
@@ -58,9 +66,9 @@ When should you use WooCommerce built-in variations versus our plugin? We wrote 
 
 During your research, you may have seen other plugins that do (more or less) the same. Here is how we are different:
 
-✅️  Our plugin is younger than the competition. It does not have to support older WooCommerce or WordPress versions, so you benefit from modern code.
+✅️  We build with modern WordPress and WooCommerce standards in mind, keeping our code clean and efficient.
 ✅️  Quality above quantity. We carefully choose what & how we implement features so the plugin remains lightweight and fast.
-✅️  The plugin's frontend scripts are tiny (~7kb) and doesn't impact your SEO score.
+✅️  The plugin's frontend scripts are tiny (~7kb) and don't impact your SEO score.
 ✅️  Easy-to-use modern backend (based on ACF) which follows WordPress & WooCommerce standards.
 ✅️  Regular updates to stay on top of new WordPress & WooCommerce versions.
 ✅️  Our plugin runs fewer database queries because we've spent time optimizing how data is stored.
@@ -77,11 +85,11 @@ Having doubts? Just contact us with your questions!
 == 👉️  Why Studio Wombat? ==
 
 * ✅ A small but friendly team of WooCommerce professionals.
-* ✅ We do this full-time, we are not hobby-developers.
+* ✅ We develop and support WooCommerce plugins full-time.
 * ✅ Over 50,000 happy customers.
 * ✅ We understand your success is our success, so we do our absolute best to help you out.
 * ✅ Dedicated support team.
-* ✅ Ahead of time, we test our plugins the latest WordPress and WooCommerce versions.
+* ✅ Ahead of time, we test our plugins with the latest WordPress and WooCommerce versions.
 * ✅ We choose quality over quantity: not every feature makes it in the plugins, but those that do are quality coded.
 * ✅ We care about your site speed.
 
@@ -91,18 +99,23 @@ Having doubts? Just contact us with your questions!
  * WordPress 4.7 or higher
  * PHP 7.0 or higher
 
-== 👉️  Limitations of the free version ==
-Our free version is great for small stores or stores that don't need to add many complex options (product addons) to their products.
-There are a few limitations of the free version that you should be aware of:
+== 👉️  Free vs. Pro: Which version do I need? ==
+The free version includes everything you need to create customizable WooCommerce products with essential field types, conditional logic, and simple pricing. For more advanced product configurations, Pro adds additional field types, flexible pricing options, and integrations.
+
+Here are some differences to keep in mind:
 
 * The free version doesn't integrate with 3rd party plugins such as WooCommerce Subscriptions or a multi-currency plugin (unless they write an integration).
 * It doesn't work with themes using Ajax technology for their product "add to cart" button.
-* The free version allows only allows you to add an extra flat fee ( = not quantity based) to your product price.
+* The free version only allows you to add an extra flat fee ( = not quantity based) to your product price.
 * You can't add fields to separate variations.
 
 If you need those features, you may consider our premium version. You can read ahead what's included with premium.
 
-== 👉️  Premium Features ==
+== 👉️  Need more advanced product options? ==
+
+Advanced Product Fields Pro takes your customizable products even further. Add image swatches, file uploads, complex pricing formulas, repeatable fields, and much more.
+
+It's ideal for stores selling personalized products, configurable items, or products requiring advanced pricing.
 
 Everything from the free version, plus:
 
@@ -116,7 +129,7 @@ Everything from the free version, plus:
   * **Calculation** - adds an informative calculation (like "square meters") or a separate extra cost calculation.
   * **Image with quantities** - image swatches with quantity inputs underneath.
   * **Child products** - select other products from your store as options (and enjoy stock control).
-  * **Cards** - clickable cards with nicely layout information.
+  * **Cards** - clickable cards with nicely laid-out information.
 * Content fields to add content to your product pages (no form inputs):
   * **Image** - to add extra images
   * **Text/HTML** - to add extra text, HTML, or even shortcodes
@@ -152,11 +165,7 @@ From your WordPress dashboard
 1. **Visit** Plugins > Add New
 2. **Search** for "Advanced Product Fields for WooCommerce"
 3. **Activate** the plugin from your Plugins page
-4. **Click** on the new menu item WooCommerce > Product Fields and create your first Custom Field Group (product addons).
-
-== Screenshots ==
-1. Example of a product with extra options.
-2. Example of the backend settings.
+4. **Click** on the new menu item WooCommerce > Product Input Fields and create your first Custom Field Group (product addons).
 
 == Frequently Asked Questions ==
 

@@ -2,11 +2,11 @@
 Contributors: studiowombat,maartenbelmans
 Tags: woocommerce product addons, woocommerce, woocommerce product options, product addons, product fields
 Requires at least: 4.5
-Tested up to: 7.1.3
+Tested up to: 7.1.4
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.7.2
+Stable tag: 1.7.3
 
 Add options (addons) to your WooCommerce products so your customers can personalize their products. Product forms for everyone!
 
@@ -198,6 +198,10 @@ Yes, you can create unlimited product options with APF, giving you full flexibil
 3. Intuitive, lightweight Product Options Builder
 	
 == Changelog ==
+
+= 1.7.3 =
+ * Fix: pricing hints in order item meta no longer show HTML codes (like "&euro;&nbsp;") when editing the order in the backend.
+ * Fix: select, radio and checkbox fields now reject values that aren't one of the configured options when adding to cart.
 
 = 1.7.2 =
  * New: you can now search field types in the "add field" popup.

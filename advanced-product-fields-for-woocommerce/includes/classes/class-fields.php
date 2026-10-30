@@ -557,7 +557,7 @@ namespace SW_WAPF\Includes\Classes {
 
                         if( $choice['pricing_type'] === 'none' )
                             $labels[] = esc_html($choice['label']);
-                        else $labels[] = sprintf('%s (%s)', esc_html($choice['label']), Helper::format_pricing_hint($choice['pricing_type'],$choice['pricing_amount'],$product,$for_page));
+                        else $labels[] = sprintf('%s (%s)', esc_html($choice['label']), self::plain_pricing_hint($choice['pricing_type'],$choice['pricing_amount'],$product,$for_page));
 
                     }
 
@@ -565,12 +565,17 @@ namespace SW_WAPF\Includes\Classes {
                 }
 
                 return $field->pricing_enabled() ?
-	                sprintf('%s (%s)', self::sanitize_value($field,$raw_value), Helper::format_pricing_hint($field->pricing->type,$field->pricing->amount,$product,$for_page))
+	                sprintf('%s (%s)', self::sanitize_value($field,$raw_value), self::plain_pricing_hint($field->pricing->type,$field->pricing->amount,$product,$for_page))
 	                : self::sanitize_value($field,$raw_value) ;
             }
 
             return self::sanitize_value($field,$raw_value);
 
+        }
+
+        // The value ends up in order meta, which is plain text (admins edit it in a textarea), so decode the HTML entities from the price format/currency symbol.
+        private static function plain_pricing_hint($type, $amount, $product, $for_page) {
+            return str_replace( "\xC2\xA0", ' ', html_entity_decode( Helper::format_pricing_hint($type, $amount, $product, $for_page), ENT_QUOTES, 'UTF-8' ) );
         }
 
         public static function do_pricing($amount, $qty) {

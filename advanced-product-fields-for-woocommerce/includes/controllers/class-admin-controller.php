@@ -221,8 +221,8 @@ namespace SW_WAPF\Includes\Controllers {
 
         public function save_fieldgroup_on_product($post_id) {
             // Nothing filled out - remove if it already existed
+            // The conditions aren't checked: a product's own group doesn't use them, and they're empty when the group has no rules.
             if(empty($_POST['wapf-fields']) ||
-                empty($_POST['wapf-conditions']) ||
                 empty($_POST['wapf-layout'])) {
                 delete_post_meta($post_id,'_wapf_fieldgroup');
                 return;

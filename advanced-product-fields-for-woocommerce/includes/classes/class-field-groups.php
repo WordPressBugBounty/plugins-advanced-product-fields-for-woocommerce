@@ -167,7 +167,7 @@ namespace SW_WAPF\Includes\Classes {
 				            $rule->value     = is_string( $raw_rule['value'] ) ? sanitize_text_field( $raw_rule['value'] ) : Enumerable::from( $raw_rule['value'] )->select( function ( $value ) {
 					            return [
 						            'id'   => sanitize_text_field( $value['id'] ),
-						            'text' => sanitize_text_field( $value['text'] )
+						            'text' => sanitize_text_field( $value['text'] ?? '' )
 					            ];
 				            } )->toArray();
 			            $rule->subject   = sanitize_text_field( $raw_rule['subject'] );

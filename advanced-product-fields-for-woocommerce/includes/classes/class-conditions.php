@@ -261,7 +261,7 @@ namespace SW_WAPF\Includes\Classes {
                 $value = $rule->value;
 
                 // Prepare 'value' to a proper array if needed.
-                if(is_array($value) && count($value) > 0 && isset($value[0]['text']))
+                if(is_array($value) && count($value) > 0 && isset($value[0]['id']))
                     $value = Enumerable::from($value)->select(function($x) {
                         return $x['id'];
                     })->toArray();

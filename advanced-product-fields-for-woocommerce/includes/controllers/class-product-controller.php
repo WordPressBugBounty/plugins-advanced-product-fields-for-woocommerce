@@ -162,16 +162,26 @@ namespace SW_WAPF\Includes\Controllers {
 			    foreach ( $field_groups as $group ) {
 				    foreach ( $group->fields as $field ) {
 
-					    // Our validation. For now, only checks "required".
-					    if ( ! Fields::should_field_be_filled_out( $group, $field ) )
-						    continue;
-
 					    $value = Fields::get_raw_field_value_from_request( $field, 0, true );
 
 					    if ( empty( $value ) ) {
-						    /* translators: %s points to the field's label as given in the admin settings */
-						    wc_add_notice( sprintf( __( 'The field "%s" is required.', 'advanced-product-fields-for-woocommerce' ), esc_html( $field->label ) ), 'error' );
-						    return false;
+						    if ( Fields::should_field_be_filled_out( $group, $field ) ) {
+							    /* translators: %s points to the field's label as given in the admin settings */
+							    wc_add_notice( sprintf( __( 'The field "%s" is required.', 'advanced-product-fields-for-woocommerce' ), esc_html( $field->label ) ), 'error' );
+							    return false;
+						    }
+						    continue;
+					    }
+
+					    // Choice fields: every submitted value must be one of the configured choices, required or not.
+					    if ( $field->is_choice_field() ) {
+						    $slugs = array_map( 'strval', array_column( $field->options['choices'] ?? [], 'slug' ) );
+						    foreach ( (array) $value as $v ) {
+							    if ( ! is_string( $v ) || ! in_array( $v, $slugs, true ) ) {
+								    wc_add_notice( esc_html( __( 'Error adding product to cart.', 'advanced-product-fields-for-woocommerce' ) ), 'error' );
+								    return false;
+							    }
+						    }
 					    }
 				    }
 			    }

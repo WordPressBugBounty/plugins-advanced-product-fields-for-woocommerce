@@ -135,7 +135,7 @@ namespace SW_WAPF\Includes\Controllers {
 
 		    $is_order_again    = isset( $cart_item_data['wapf_order_again'] ) && $cart_item_data['wapf_order_again'];
 		    $field_group_ids   = isset( $_REQUEST['wapf_field_groups'] ) ? sanitize_text_field( $_REQUEST['wapf_field_groups'] ) : false;
-		    $is_url_add_to_cart = isset( $_GET['add-to-cart'] ) && is_numeric( $_GET['add-to-cart'] ) && ! $field_group_ids;
+		    $is_url_add_to_cart = isset( $_GET['add-to-cart'] ) && is_numeric( $_GET['add-to-cart'] ) && ! $field_group_ids && empty( $_REQUEST['wapf'] );
 
 		    // Field group integrity check: wapf_field_groups must be present and match server-side groups.
 		    // Skipped for order-again (no form submitted) and URL add-to-cart (no APF form).
@@ -302,7 +302,7 @@ namespace SW_WAPF\Includes\Controllers {
 
         public function add_fields_to_cart_item($cart_item_data, $product_id, $variation_id) {
 
-            if(empty($_REQUEST['wapf']) || isset($cart_item_data['wapf']) || !isset($_REQUEST['wapf_field_groups']))
+            if(empty($_REQUEST['wapf']) || isset($cart_item_data['wapf']))
                 return $cart_item_data;
 
             if(!is_array($_REQUEST['wapf']))

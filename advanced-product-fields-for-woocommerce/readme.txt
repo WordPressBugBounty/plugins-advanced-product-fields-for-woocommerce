@@ -6,7 +6,7 @@ Tested up to: 7.2
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.7.4
+Stable tag: 1.7.5
 
 Add options (addons) to your WooCommerce products so your customers can personalize their products. Product forms for everyone!
 
@@ -200,6 +200,9 @@ Yes, you can create unlimited product options with APF, giving you full flexibil
 5. Every selected option is visible in the cart, checkout, and order details.
 
 == Changelog ==
+
+= 1.7.5 =
+ * Improvement: stricter sanitization of values customers enter in product options.
 
 = 1.7.4 =
  * Improvement: stricter validation of product options when adding to cart.

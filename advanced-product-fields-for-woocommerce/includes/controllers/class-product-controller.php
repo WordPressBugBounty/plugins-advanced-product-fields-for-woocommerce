@@ -433,7 +433,7 @@ namespace SW_WAPF\Includes\Controllers {
             return [
                 'id'                => $field->id,
                 'type'              => $field->type,
-	            'raw'               => is_string( $raw_value ) ? sanitize_textarea_field( $raw_value ) : array_map('sanitize_textarea_field', $raw_value),
+	            'raw'               => is_string( $raw_value ) ? Fields::sanitize_textarea( $raw_value ) : array_map( [ Fields::class, 'sanitize_textarea' ], $raw_value ),
                 'value'             => Fields::value_to_string($field, $raw_value, ! empty( $price_addition ), $product),
                 // Cart may have different tax settings, so we should also have a value_cart to use in cart/checkout.
                 'value_cart'        => Fields::value_to_string($field, $raw_value, !empty( $price_addition ), $product,'cart'),

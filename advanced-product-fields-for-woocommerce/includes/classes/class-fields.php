@@ -458,7 +458,7 @@ namespace SW_WAPF\Includes\Classes {
 		        	return Enumerable::from((array)$value)->select(function($x){
 		        		return sanitize_text_field($x);
 			        })->toArray();
-		        case 'textarea'     : return sanitize_textarea_field(trim($value));
+		        case 'textarea'     : return self::sanitize_textarea( $value );
 		        case 'number'       : return filter_var(Helper::normalize_string_decimal($value),FILTER_SANITIZE_NUMBER_FLOAT,FILTER_FLAG_ALLOW_FRACTION);
 		        case 'true-false'   : return $value == '1' ? __('true','advanced-product-fields-for-woocommerce') : __('false','advanced-product-fields-for-woocommerce');
 		        case 'email'        : return sanitize_email(trim($value));
@@ -469,7 +469,7 @@ namespace SW_WAPF\Includes\Classes {
         public static function sanitize_value(Field $field,$value) {
 
             switch($field->type) {
-                case 'textarea'     : return sanitize_textarea_field(trim($value));
+                case 'textarea'     : return self::sanitize_textarea( $value );
                 case 'number'       : return filter_var(Helper::normalize_string_decimal($value),FILTER_SANITIZE_NUMBER_FLOAT,FILTER_FLAG_ALLOW_FRACTION);
                 case 'true-false'   : return $value == '1' ? __('true','advanced-product-fields-for-woocommerce') : __('false','advanced-product-fields-for-woocommerce');
                 case 'email'        : return sanitize_email(trim($value));
@@ -485,9 +485,18 @@ namespace SW_WAPF\Includes\Classes {
 
 			            return '';
 		            })->toArray());
-                default             : return sanitize_text_field(trim($value));
+                default             : return self::sanitize_text( $value );
             }
         }
+
+	    // sanitize_text_field() keeps "< div>" ("<" + whitespace), and wp_kses_post() on output turns it into a real tag. So encode that "<".
+	    public static function sanitize_text( $value ) {
+		    return preg_replace( '/<(?=\s)/', '&lt;', sanitize_text_field( trim( $value ) ) );
+	    }
+
+	    public static function sanitize_textarea( $value ) {
+		    return preg_replace( '/<(?=\s)/', '&lt;', sanitize_textarea_field( trim( $value ) ) );
+	    }
 
 	    public static function get_raw_field_value_from_request(Field $for_field, $clone_index = 0, $return_null = false) {
 
